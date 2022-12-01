@@ -35,6 +35,12 @@ namespace Dragger_WPF
         {
             kanbanBoard.Width = new GridLength(0, GridUnitType.Star);
             responsable.Width = new GridLength(1, GridUnitType.Star);
+            addButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

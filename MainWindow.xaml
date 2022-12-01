@@ -23,17 +23,36 @@
         </Grid.RowDefinitions>
         <Button Width="200" Height="100" VerticalAlignment="Top" Click="kanbanView" Content="KANBAN" FontSize="28" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
         <Button Width="200" Height="100" VerticalAlignment="Top" Click="Button_Click_1" Grid.Column="1" Content="RESPONSABLE" FontSize="28" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+        <Button x:Name="addButton" Width="200" Height="100" Click="Button_Click" Grid.Column="7" Content="+" FontSize="80" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
         <Grid Grid.Row="1" Grid.ColumnSpan="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="kanbanBoard"/>
                 <ColumnDefinition x:Name="responsable" Width="0*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
-                <Viewbox>
-                    <TextBlock>
-                        HOLA
-                    </TextBlock>
-                </Viewbox>
+                <!-- TODO -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" Width="600" Height="800" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="8" Margin="0,0,0,40">
+                            <TextBlock HorizontalAlignment="Center" FontSize="40">TO DO</TextBlock>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- DOING -->
+                    <StackPanel Orientation="Vertical" Width="600" Height="800" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,0,20,0">
+                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="8" Margin="0,0,0,40">
+                            <TextBlock HorizontalAlignment="Center" FontSize="40">DOING</TextBlock>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- DONE -->
+                    <StackPanel Orientation="Vertical" Width="600" Height="800" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="8" Margin="0,0,0,40">
+                            <TextBlock HorizontalAlignment="Center" FontSize="40">DONE</TextBlock>
+                        </Border>
+                    </StackPanel>
+                    
+                </StackPanel>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
