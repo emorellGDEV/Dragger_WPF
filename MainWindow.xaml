@@ -101,8 +101,8 @@
         </Button>
         <Grid Grid.Row="1" Grid.ColumnSpan="8">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="kanbanBoard"/>
-                <ColumnDefinition x:Name="responsable" Width="0*"/>
+                <ColumnDefinition x:Name="kanbanBoard" Width="0*"/>
+                <ColumnDefinition x:Name="responsable" />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Height="850">
@@ -180,10 +180,26 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <Viewbox>
-                    <TextBlock>ADEU</TextBlock>
-                </Viewbox>
+
+                <Border VerticalAlignment="Center" Margin="0,40,0,0"  BorderThickness="1" Width="1700" Height="700">
+                    <Border.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </Border.Background>
+                    
+                    <Border HorizontalAlignment="Left" Height="109" CornerRadius="10"  Name="border1" VerticalAlignment="Top"  BorderThickness="2" Width="330" Margin="30,30,0,0"  Background="White" Opacity="0.5">
+                        <Grid Margin="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition >
+                                </RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="35" Height="40"  Margin="20,0,0,0"> Codi</TextBlock>
+                            <TextBlock HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="40" Margin="0,0,20,0"> Nom Resp</TextBlock>
+                        </Grid>
+                    </Border>
+                </Border>
+
             </StackPanel>
+            
 
         </Grid>
     </Grid>
