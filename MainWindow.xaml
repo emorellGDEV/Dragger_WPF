@@ -176,8 +176,12 @@
 
             <StackPanel Grid.Column="1">
 
-                <Border VerticalAlignment="Center" Margin="0,40,0,0" Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Width="1700" Height="700">
-                    <Border HorizontalAlignment="Left" Height="109" CornerRadius="10"  Name="border1" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="2" Width="330" Margin="30,30,0,0">
+                <Border VerticalAlignment="Center" Margin="0,40,0,0"  BorderThickness="1" Width="1700" Height="700">
+                    <Border.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.5"/>
+                    </Border.Background>
+                    
+                    <Border HorizontalAlignment="Left" Height="109" CornerRadius="10"  Name="border1" VerticalAlignment="Top"  BorderThickness="2" Width="330" Margin="30,30,0,0"  Background="White" Opacity="0.5">
                         <Grid Margin="3">
                             <Grid.RowDefinitions>
                                 <RowDefinition >
@@ -185,11 +189,7 @@
                             </Grid.RowDefinitions>
                             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="35" Height="40"  Margin="20,0,0,0"> Codi</TextBlock>
                             <TextBlock HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="40" Margin="0,0,20,0"> Nom Resp</TextBlock>
-                            
-                            
                         </Grid>
-
-
                     </Border>
                 </Border>
 
