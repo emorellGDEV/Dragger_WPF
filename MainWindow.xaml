@@ -6,7 +6,79 @@
         xmlns:local="clr-namespace:Dragger_WPF"
         mc:Ignorable="d"
         Title="Dragger" Height="1000" Width="1900">
-    <Grid>
+    <Window.Background>
+        <ImageBrush ImageSource="Resources/Background.png"/>
+    </Window.Background>
+    <Window.Resources>
+        <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Grid x:Name="Grid">
+                            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Fill="Transparent" />
+                            <Border x:Name="ScrollBarRectangle" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto"  Background="{TemplateBinding Background}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Tag" Value="Horizontal">
+                                <Setter TargetName="ScrollBarRectangle" Property="Width" Value="Auto" />
+                                <Setter TargetName="ScrollBarRectangle" Property="Height" Value="7" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Margin" Value="-5,0,0,0" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+            <Setter Property="Foreground" Value="#FF8C8C8C" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="GridRoot" Width="8" Background="{TemplateBinding Background}">
+                            <Track x:Name="PART_Track" IsDirectionReversed="true" Focusable="false">
+                                <Track.Thumb>
+                                    <Thumb x:Name="ScrollBarThumb" Background="{TemplateBinding Foreground}" Style="{StaticResource ScrollThumbs}" />
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="false" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="false" />
+                                </Track.DecreaseRepeatButton>
+                            </Track>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="ScrollBarThumb" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="Orientation" Value="Horizontal">
+                                <Setter TargetName="GridRoot" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="PART_Track" Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Width" Value="Auto" />
+                                <Setter Property="Height" Value="8" />
+                                <Setter TargetName="ScrollBarThumb" Property="Tag" Value="Horizontal" />
+                                <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
+                                <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="{Binding Source=Resources\Background.png}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -21,9 +93,11 @@
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Width="200" Height="100" VerticalAlignment="Top" Click="kanbanView" Content="KANBAN" FontSize="28" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
-        <Button Width="200" Height="100" VerticalAlignment="Top" Click="Button_Click_1" Grid.Column="1" Content="RESPONSABLE" FontSize="28" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
-        <Button x:Name="addButton" Width="200" Height="100" Click="Button_Click" Grid.Column="7" Content="+" FontSize="80" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+        <Button Width="200" Height="50" VerticalAlignment="Center" Click="kanbanView" Content="KANBAN" FontSize="28" FontWeight="Bold" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+        <Button Width="200" Height="50" VerticalAlignment="Center" Click="Button_Click_1" Grid.Column="1" Content="RESPONSABLE" FontSize="28" FontWeight="Bold" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+        <Button x:Name="addButton" Width="70" Height="70" Click="Button_Click" Grid.Column="7" FontSize="80" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <Image Source="/Resources/add_Icon.png" />
+        </Button>
         <Grid Grid.Row="1" Grid.ColumnSpan="8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="kanbanBoard" Width="0*"/>
@@ -33,23 +107,68 @@
                 <!-- TODO -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <StackPanel Orientation="Vertical" Width="600" Height="800" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="8" Margin="0,0,0,40">
-                            <TextBlock HorizontalAlignment="Center" FontSize="40">TO DO</TextBlock>
+                        <Border BorderBrush="Black" BorderThickness="4" CornerRadius="8">
+                            <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold">TO DO</TextBlock>
                         </Border>
+
+                        <ScrollViewer VerticalAlignment="Top" Width="600" Height="750" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.5"/>
+                            </ScrollViewer.Background>
+                            <StackPanel x:Name="stackTODO">
+                                <Border Background="White" Opacity="0.2" Width="550" Height="300" CornerRadius="8" Margin="20">
+
+                                </Border>
+
+                                <Border Background="White" Opacity="0.2" Width="550" Height="300" CornerRadius="8" Margin="20">
+
+                                </Border>
+
+                                <Border Background="White" Opacity="0.2" Width="550" Height="300" CornerRadius="8" Margin="20">
+
+                                </Border>
+
+                                <Border Background="White" Opacity="0.2" Width="550" Height="300" CornerRadius="8" Margin="20">
+
+                                </Border>
+                            </StackPanel>
+                        </ScrollViewer>
                     </StackPanel>
 
                     <!-- DOING -->
                     <StackPanel Orientation="Vertical" Width="600" Height="800" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,0,20,0">
-                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="8" Margin="0,0,0,40">
-                            <TextBlock HorizontalAlignment="Center" FontSize="40">DOING</TextBlock>
+                        <Border BorderBrush="Black" BorderThickness="4" CornerRadius="8">
+                            <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold">DOING</TextBlock>
                         </Border>
+
+                        <ScrollViewer VerticalAlignment="Top" Width="600" Height="750" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.5"/>
+                            </ScrollViewer.Background>
+                            <StackPanel x:Name="stackDOING">
+                                <Border Background="White" Opacity="0.2" Width="550" Height="300" CornerRadius="8" Margin="20">
+
+                                </Border>
+                            </StackPanel>
+                        </ScrollViewer>
                     </StackPanel>
 
                     <!-- DONE -->
                     <StackPanel Orientation="Vertical" Width="600" Height="800" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="8" Margin="0,0,0,40">
-                            <TextBlock HorizontalAlignment="Center" FontSize="40">DONE</TextBlock>
+                        <Border BorderBrush="Black" BorderThickness="4" CornerRadius="8">
+                            <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold">DONE</TextBlock>
                         </Border>
+
+                        <ScrollViewer VerticalAlignment="Top" Width="600" Height="750" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.5"/>
+                            </ScrollViewer.Background>
+                            <StackPanel x:Name="stackDONE">
+                                <Border Background="White" Opacity="0.2" Width="550" Height="300" CornerRadius="8" Margin="20">
+
+                                </Border>
+                            </StackPanel>
+                        </ScrollViewer>
                     </StackPanel>
 
                 </StackPanel>
