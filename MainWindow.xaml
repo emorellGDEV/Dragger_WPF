@@ -26,8 +26,8 @@
         <Button x:Name="addButton" Width="200" Height="100" Click="Button_Click" Grid.Column="7" Content="+" FontSize="80" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
         <Grid Grid.Row="1" Grid.ColumnSpan="8">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="kanbanBoard"/>
-                <ColumnDefinition x:Name="responsable" Width="0*"/>
+                <ColumnDefinition x:Name="kanbanBoard" Width="0*"/>
+                <ColumnDefinition x:Name="responsable" />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <!-- TODO -->
@@ -51,15 +51,31 @@
                             <TextBlock HorizontalAlignment="Center" FontSize="40">DONE</TextBlock>
                         </Border>
                     </StackPanel>
-                    
+
                 </StackPanel>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <Viewbox>
-                    <TextBlock>ADEU</TextBlock>
-                </Viewbox>
+
+                <Border VerticalAlignment="Center" Margin="0,40,0,0" Background="GhostWhite" BorderBrush="Gainsboro" BorderThickness="1" Width="1700" Height="700">
+                    <Border HorizontalAlignment="Left" Height="109" CornerRadius="10"  Name="border1" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="2" Width="330" Margin="30,30,0,0">
+                        <Grid Margin="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition >
+                                </RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="35" Height="40"  Margin="20,0,0,0"> Codi</TextBlock>
+                            <TextBlock HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="40" Margin="0,0,20,0"> Nom Resp</TextBlock>
+                            
+                            
+                        </Grid>
+
+
+                    </Border>
+                </Border>
+
             </StackPanel>
+            
 
         </Grid>
     </Grid>
