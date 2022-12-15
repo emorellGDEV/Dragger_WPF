@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dragger_WPF"
         mc:Ignorable="d"
-        Title="Dragger" Height="1000" Width="1900">
+        Title="Dragger" Height="1000" Width="1900"
+        Closing="Window_Closing">
     <Window.Background>
         <ImageBrush ImageSource="Resources/Background2.png"/>
     </Window.Background>
@@ -96,13 +97,27 @@
         </Grid.RowDefinitions>
         <Button Width="200" Height="50" VerticalAlignment="Center" Click="kanbanView" Content="KANBAN" FontSize="28" FontWeight="Bold" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
         <Button Width="200" Height="50" VerticalAlignment="Center" Click="Button_Click_1" Grid.Column="1" Content="RESPONSABLE" FontSize="28" FontWeight="Bold" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
-        <Button x:Name="addButton" Width="50" Height="50" Click="Button_Click" Grid.Column="7" FontSize="80" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+        <Button x:Name="addButton" Width="50" Height="50" Click="Button_Click_Add" Grid.Column="7" FontSize="80" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <Image Source="/Resources/add_Icon.png" />
+        </Button>
+        <Button x:Name="addButtonRes" Width="50" Height="50" Click="addButtonRes_Click"  Grid.Column="7" FontSize="80" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Visibility="Collapsed">
             <Image Source="/Resources/add_Icon.png" />
         </Button>
         <Grid Grid.Row="1" Grid.ColumnSpan="8">
             <Grid.ColumnDefinitions>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                <ColumnDefinition x:Name="kanbanBoard" />
+                <ColumnDefinition x:Name="responsable" Width="1*"/>
+                <ColumnDefinition x:Name="kanbanBoard" Width="0*" />
+=======
                 <ColumnDefinition x:Name="kanbanBoard" Width="0*" />
                 <ColumnDefinition x:Name="responsable"   />
+>>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
+=======
+                <ColumnDefinition x:Name="kanbanBoard" Width="0*" />
+                <ColumnDefinition x:Name="responsable"   />
+>>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Height="850">
@@ -118,21 +133,18 @@
                                     <SolidColorBrush Color="Black" Opacity="0.5"/>
                                 </ScrollViewer.Background>
                                 <StackPanel x:Name="stackTODO">
-                                    <Border Background="White" Opacity="0.2" Width="540" Height="300" CornerRadius="8" Margin="20">
+                                    <!-- ITEMS -->
+
+                                    <Border Width="540" Height="300" CornerRadius="8" Margin="20">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="White" Opacity="0.2"/>
+                                        </Border.Background>
 
                                     </Border>
 
-                                    <Border Background="White" Opacity="0.2" Width="550" Height="300" CornerRadius="8" Margin="20">
 
-                                    </Border>
 
-                                    <Border Background="White" Opacity="0.2" Width="550" Height="300" CornerRadius="8" Margin="20">
 
-                                    </Border>
-
-                                    <Border Background="White" Opacity="0.2" Width="550" Height="300" CornerRadius="8" Margin="20">
-
-                                    </Border>
                                 </StackPanel>
                             </ScrollViewer>
                         </Border>
@@ -149,9 +161,6 @@
                                     <SolidColorBrush Color="Black" Opacity="0.5"/>
                                 </ScrollViewer.Background>
                                 <StackPanel x:Name="stackDOING">
-                                    <Border Background="White" Opacity="0.2" Width="550" Height="300" CornerRadius="8" Margin="20">
-
-                                    </Border>
                                 </StackPanel>
                             </ScrollViewer>
                         </Border>
@@ -168,9 +177,6 @@
                                     <SolidColorBrush Color="Black" Opacity="0.5"/>
                                 </ScrollViewer.Background>
                                 <StackPanel x:Name="stackDONE">
-                                    <Border Background="White" Opacity="0.2" Width="550" Height="300" CornerRadius="8" Margin="20">
-
-                                    </Border>
                                 </StackPanel>
                             </ScrollViewer>
                         </Border>
@@ -187,11 +193,36 @@
                     <Border.Background>
                         <SolidColorBrush Color="Black" Opacity="0.5"/>
                     </Border.Background>
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+                    <Border HorizontalAlignment="Left" Height="109" CornerRadius="10"  Name="border1" VerticalAlignment="Top"  BorderThickness="2" Width="330" Margin="30,30,0,0"  Background="White" Opacity="0.5" MouseEnter="Border_MouseEnter">
+                        <Grid Margin="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition >
+                                </RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="35" Height="40"  Margin="20,0,0,0"> Codi</TextBlock>
+                            <TextBlock HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="40" Margin="0,0,20,0"> Nom Resp</TextBlock>
+                        </Grid>
+                    </Border>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalAlignment="Center" Height="699">
+
+                        <Border  HorizontalAlignment="Left"  CornerRadius="10"  Name="etiqueta" VerticalAlignment="Top"  BorderThickness="2" Width="330" Height="150" Margin="30,30,0,0"  Background="White" Opacity="0.5">
+
+                            <Grid Margin="0,0,0,-2">
+=======
+=======
+>>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
                     <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalAlignment="Center" Height="699">
                         
                             <Border  HorizontalAlignment="Left"  CornerRadius="10"  Name="etiqueta" VerticalAlignment="Top"  BorderThickness="2" Width="330" Height="150" Margin="30,30,0,0"  Background="White" Opacity="0.5">
                            
                                 <Grid Margin="0,0,0,-2">
+<<<<<<< HEAD
+>>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
+=======
+>>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
                                 <Grid.RowDefinitions>
                                     <RowDefinition >
                                     </RowDefinition>
@@ -209,13 +240,28 @@
                                     <Image Source="/Resources/eliminar.png" ></Image>
                                 </Button>
                             </Grid>
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
                             
+>>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
+=======
+                            
+>>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
                         </Border>
 
 
 
                     </ScrollViewer>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
+>>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
+=======
+
+>>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
                 </Border>
 
             </StackPanel>

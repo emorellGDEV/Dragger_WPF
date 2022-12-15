@@ -31,6 +31,13 @@
     <Content Include="Resources\eliminar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+<<<<<<< HEAD
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SQLite" Version="1.0.117" />
+=======
+>>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
   </ItemGroup>
 
 </Project>
