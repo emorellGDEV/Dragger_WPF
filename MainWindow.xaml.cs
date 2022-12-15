@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dragger_WPF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,7 +42,21 @@ namespace Dragger_WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+          
+        }
 
+        void Editar(object sender, RoutedEventArgs e)
+        {
+            Window1 formulari = new Window1();
+           
+            bool resultat = (bool)formulari.ShowDialog();
+
+        }
+
+        void Eliminar(object sender, RoutedEventArgs e)
+        {
+          
+            
         }
     }
 }
