@@ -29,7 +29,7 @@ namespace Dragger_WPF
         }
         private void OK(object sender, RoutedEventArgs e)
         {
-            codi.Text = codiF.Text;
+            //codi.Text = codiF.Text;
         }
     }
 }

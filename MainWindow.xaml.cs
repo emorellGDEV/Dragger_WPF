@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-﻿using Dragger_WPF.Entity;
+using Dragger_WPF.Entity;
 using Dragger_WPF.Persistence;
-=======
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
-=======
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
 ﻿using Dragger_WPF;
 using System;
 using System.Collections.Generic;
@@ -54,8 +48,6 @@ namespace Dragger_WPF
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
             MessageBox.Show("Add Kanban");
         }
 
@@ -74,18 +66,8 @@ namespace Dragger_WPF
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SaveCards();          
-        }
+        }          
 
-=======
-          
-        }
-
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
-=======
-          
-        }
-
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
         void Editar(object sender, RoutedEventArgs e)
         {
             Window1 formulari = new Window1();

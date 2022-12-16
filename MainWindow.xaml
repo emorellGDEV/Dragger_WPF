@@ -105,19 +105,8 @@
         </Button>
         <Grid Grid.Row="1" Grid.ColumnSpan="8">
             <Grid.ColumnDefinitions>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <ColumnDefinition x:Name="kanbanBoard" />
                 <ColumnDefinition x:Name="responsable" Width="1*"/>
-                <ColumnDefinition x:Name="kanbanBoard" Width="0*" />
-=======
-                <ColumnDefinition x:Name="kanbanBoard" Width="0*" />
-                <ColumnDefinition x:Name="responsable"   />
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
-=======
-                <ColumnDefinition x:Name="kanbanBoard" Width="0*" />
-                <ColumnDefinition x:Name="responsable"   />
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
+                <ColumnDefinition x:Name="kanbanBoard" Width="0*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Height="850">
@@ -185,6 +174,8 @@
                 </StackPanel>
             </StackPanel>
 
+
+
             <StackPanel Grid.Column="1">
 
                 <Border VerticalAlignment="Center" Margin="0,40,0,0"  BorderThickness="1" Width="1700" Height="700" >
@@ -193,75 +184,28 @@
                     <Border.Background>
                         <SolidColorBrush Color="Black" Opacity="0.5"/>
                     </Border.Background>
-<<<<<<< HEAD
-<<<<<<< HEAD
+                    <Border  HorizontalAlignment="Left"  CornerRadius="10"  Name="etiqueta" VerticalAlignment="Top"  BorderThickness="2" Width="330" Height="150" Margin="30,30,0,0"  Background="White" Opacity="0.5">
 
-                    <Border HorizontalAlignment="Left" Height="109" CornerRadius="10"  Name="border1" VerticalAlignment="Top"  BorderThickness="2" Width="330" Margin="30,30,0,0"  Background="White" Opacity="0.5" MouseEnter="Border_MouseEnter">
-                        <Grid Margin="3">
+                        <Grid Margin="0,0,0,-2">
                             <Grid.RowDefinitions>
                                 <RowDefinition >
                                 </RowDefinition>
+                                <RowDefinition >
+                                </RowDefinition>
                             </Grid.RowDefinitions>
-                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="35" Height="40"  Margin="20,0,0,0"> Codi</TextBlock>
-                            <TextBlock HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="40" Margin="0,0,20,0"> Nom Resp</TextBlock>
+
+                            <TextBlock x:Name="codi" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="35" Height="40"  Margin="20,10,0,0"  > Codi</TextBlock>
+                            <TextBlock x:Name="nomR" HorizontalAlignment="Right"  VerticalAlignment="Top" FontSize="35" Height="40" Margin="0,10,20,0"> Nom Resp</TextBlock>
+
+                            <Button   BorderThickness="0" HorizontalAlignment="Right" Name="editar" Click="Editar" Grid.Row="1" Width="40" Height="50"  Margin="0,0,60,0"  Background="White">
+                                <Image Source="/Resources/edit.png" ></Image>
+                            </Button>
+                            <Button  BorderThickness="0" HorizontalAlignment="Right" Name="eliminar" Click="Eliminar" Grid.Row="1" Width="40" Height="50" Margin="0,0,10,0"     Background="White">
+                                <Image Source="/Resources/eliminar.png" ></Image>
+                            </Button>
                         </Grid>
                     </Border>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalAlignment="Center" Height="699">
 
-                        <Border  HorizontalAlignment="Left"  CornerRadius="10"  Name="etiqueta" VerticalAlignment="Top"  BorderThickness="2" Width="330" Height="150" Margin="30,30,0,0"  Background="White" Opacity="0.5">
-
-                            <Grid Margin="0,0,0,-2">
-=======
-=======
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalAlignment="Center" Height="699">
-                        
-                            <Border  HorizontalAlignment="Left"  CornerRadius="10"  Name="etiqueta" VerticalAlignment="Top"  BorderThickness="2" Width="330" Height="150" Margin="30,30,0,0"  Background="White" Opacity="0.5">
-                           
-                                <Grid Margin="0,0,0,-2">
-<<<<<<< HEAD
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
-=======
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
-                                <Grid.RowDefinitions>
-                                    <RowDefinition >
-                                    </RowDefinition>
-                                    <RowDefinition >
-                                    </RowDefinition>
-                                </Grid.RowDefinitions>
-
-                                <TextBlock x:Name="codi" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="35" Height="40"  Margin="20,10,0,0"  > Codi</TextBlock>
-                                <TextBlock x:Name="nomR" HorizontalAlignment="Right"  VerticalAlignment="Top" FontSize="35" Height="40" Margin="0,10,20,0"> Nom Resp</TextBlock>
-
-                                <Button   BorderThickness="0" HorizontalAlignment="Right" Name="editar" Click="Editar" Grid.Row="1" Width="40" Height="50"  Margin="0,0,60,0"  Background="White">
-                                    <Image Source="/Resources/edit.png" ></Image>
-                                </Button>
-                                <Button  BorderThickness="0" HorizontalAlignment="Right" Name="eliminar" Click="Eliminar" Grid.Row="1" Width="40" Height="50" Margin="0,0,10,0"     Background="White">
-                                    <Image Source="/Resources/eliminar.png" ></Image>
-                                </Button>
-                            </Grid>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-                            
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
-=======
-                            
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
-                        </Border>
-
-
-
-                    </ScrollViewer>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
-=======
-
->>>>>>> 1a0463f0f5bd30e78a3b37d6c9611555e02d98c7
                 </Border>
 
             </StackPanel>
