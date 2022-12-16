@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
-
+using System.Windows;
 
 namespace Dragger_WPF.Persistence
 {
     class DbContext
     {
         private const string DBName = "database.sqlite";
-        private const string SQLScript = @"..\..\Util\database.sql";
+        private const string SQLScript = @"C:\Users\eduar\OneDrive\DAM2\M13 _Projecte\Projecte\Dragger - WPF\Dragger_WPF\Util\database.sql";
         private static bool IsDbRecentlyCreated = false;
 
 
@@ -50,20 +50,29 @@ namespace Dragger_WPF.Persistence
 
         public static void InsertCard(Entity.Card card)
         {
-            SQLiteCommand insertSQL = new SQLiteCommand("INSERT INTO Cards VALUES (?,?,?,?,?,?)");
-            insertSQL.Parameters.Add(card._id_card);
-            insertSQL.Parameters.Add(card._id_persona);
-            insertSQL.Parameters.Add(card._description);
-            insertSQL.Parameters.Add(card._color);
-            insertSQL.Parameters.Add(card._goalDate);
-            insertSQL.Parameters.Add(card._creationDate);
             try
             {
-                insertSQL.ExecuteNonQuery();
-            }
-            catch (Exception ex)
+                using (var ctx = GetInstance())
+                {
+                    var insert = "INSERT INTO Cards VALUES (?,?,?,?,?,?,?,?)";
+
+                    using (var command = new SQLiteCommand(insert, ctx))
+                    {
+                        command.Parameters.Add(new SQLiteParameter("id_card", card._id_card.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("fk_id_responsable", card._id_persona.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("description", card._description.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("color", card._color.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("priority", card._priority.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("goalDate", card._goalDate.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("creationDate", card._creationDate.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("position", card._position.ToString()));
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            } catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
 
