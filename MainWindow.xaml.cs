@@ -24,10 +24,15 @@ namespace Dragger_WPF
     public partial class MainWindow : Window
     {
         List<Card> cards = new List<Card>();
+    
+        
 
+       
         public MainWindow()
         {
             InitializeComponent();
+          
+
         }
 
         private void kanbanView(object sender, RoutedEventArgs e)
@@ -70,15 +75,22 @@ namespace Dragger_WPF
 
         void Editar(object sender, RoutedEventArgs e)
         {
-            Window1 formulari = new Window1();
-           
-            bool resultat = (bool)formulari.ShowDialog();
+
+           Window1 dialogBoxWithResult = new Window1();
+
+            bool resultat = (bool)dialogBoxWithResult.ShowDialog();
+
+            if (resultat) //Nos debe regresar un Dialogresult.OK
+            {
+                codiR.Text = dialogBoxWithResult.CodiResponsable;
+                nomR.Text = dialogBoxWithResult.NomResponsable;
+            }
 
         }
 
         void Eliminar(object sender, RoutedEventArgs e)
         {
-          
+                
             
         }
     }

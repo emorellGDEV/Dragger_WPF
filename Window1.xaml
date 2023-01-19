@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dragger_WPF"
         Title="Formulari"
-    MaxHeight="600"
+    MaxHeight="250"
     MaxWidth="400"
     MinHeight="250"
     MinWidth="400"
@@ -33,16 +33,16 @@
         <!-- Accept or Cancel -->
 
 
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" Height="27" Width="72"  Grid.ColumnSpan="2"> Codi:</TextBlock>
-        <TextBox x:Name="codiF" Grid.Column="2" HorizontalAlignment="Left" Width="150"  FontSize="20" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="25" Height="27" Width="72"  Grid.Column="1"> Codi:</TextBlock>
+        <TextBox x:Name="codiF" Grid.Column="2" HorizontalAlignment="Right" Width="150" Height="40" FontSize="20" Margin="0,0,10,0"   />
 
 
-        <TextBlock Grid.ColumnSpan="3" Grid.Row="1" VerticalAlignment="Center" FontSize="25" Height="70"  >Nom responsable:</TextBlock>
-        <TextBox  x:Name="NomRF" Grid.Column="2" HorizontalAlignment="Left" Width="150"  FontSize="20" Grid.RowSpan="2" Margin="113,0,0,0" />
+        <TextBlock Grid.ColumnSpan="3" Grid.Row="1" VerticalAlignment="Center" FontSize="25" Height="30" Width="250" Margin="0,0,120,0" >Nom responsable:</TextBlock>
+        <TextBox  x:Name="nomF" Grid.Column="2" HorizontalAlignment="Right" Width="150" Height="40"  FontSize="20" Grid.Row="1" Margin="0,0,10,0" />
 
-        <Button Grid.Column="2" HorizontalAlignment="Left" Grid.Row="1" Name="okButton" Background="White"  Width="80" Content="OK" FontSize="20"  Click="ok"  />
+        <Button Grid.Column="2" HorizontalAlignment="Left" Grid.Row="2" Name="okButton" Background="White"  Width="80" Height="40" Content="OK" FontSize="20"  Click="tornar"  />
 
-        <Button HorizontalAlignment="Left" Grid.Column="2" Grid.Row="1" Name="Cancel" Background="White"  Width="80" Content="Cancel" FontSize="20"   Click="Sortir" Grid.RowSpan="2"/>
+        <Button HorizontalAlignment="Right" Grid.Column="2" Grid.Row="2" Name="Cancel" Background="White"  Width="80" Height="40" Content="Cancel" FontSize="20"  Click="Sortir"  Margin="0,0,10,0" />
 
     </Grid >
 </Window>
