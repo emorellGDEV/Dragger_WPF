@@ -35,18 +35,26 @@ namespace Dragger_WPF
 
         private void kanbanView(object sender, RoutedEventArgs e)
         {
-            kanbanBoard.Width = new GridLength(1, GridUnitType.Star);
-            responsable.Width = new GridLength(0, GridUnitType.Star);
-            addButton.Visibility = Visibility.Visible;
-            addButtonRes.Visibility = Visibility.Collapsed;
+            if (addButton.Visibility == Visibility.Collapsed)
+            {
+                kanbanBoard.Width = new GridLength(1, GridUnitType.Star);
+                responsable.Width = new GridLength(0, GridUnitType.Star);
+                addButton.Visibility = Visibility.Visible;
+                addButtonRes.Visibility = Visibility.Collapsed;
+            }
+
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void responsableView(object sender, RoutedEventArgs e)
         {
-            kanbanBoard.Width = new GridLength(0, GridUnitType.Star);
-            responsable.Width = new GridLength(1, GridUnitType.Star);
-            addButton.Visibility = Visibility.Collapsed;
-            addButtonRes.Visibility = Visibility.Visible;
+            if (addButtonRes.Visibility == Visibility.Collapsed)
+            {
+                kanbanBoard.Width = new GridLength(0, GridUnitType.Star);
+                responsable.Width = new GridLength(1, GridUnitType.Star);
+                addButton.Visibility = Visibility.Collapsed;
+                addButtonRes.Visibility = Visibility.Visible;
+            }
+
         }
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)
@@ -129,8 +137,9 @@ namespace Dragger_WPF
 
         private void addButtonRes_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Add Responsable");
+            MessageBox.Show("Responsable");
         }
+
 
         private void SaveCards()
         {

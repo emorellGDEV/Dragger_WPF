@@ -95,8 +95,8 @@
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Width="200" Height="50" VerticalAlignment="Center" Click="Button_Click_1" Content="KANBAN" FontSize="28" FontWeight="Bold" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
-        <Button Width="200" Height="50" VerticalAlignment="Center" Click="kanbanView" Grid.Column="1" Content="RESPONSABLE" FontSize="28" FontWeight="Bold" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+        <Button Width="200" Height="50" VerticalAlignment="Center" Click="kanbanView" Content="KANBAN" FontSize="28" FontWeight="Bold" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+        <Button Width="200" Height="50" VerticalAlignment="Center" Click="responsableView" Grid.Column="1" Content="RESPONSABLE" FontSize="28" FontWeight="Bold" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
         <Button x:Name="addButton" Width="50" Height="50" Click="Button_Click_Add" Grid.Column="7" FontSize="80" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
             <Image Source="/Resources/add_Icon.png" />
         </Button>
@@ -105,8 +105,8 @@
         </Button>
         <Grid Grid.Row="1" Grid.ColumnSpan="8">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="responsable" Width="0*"/>
-                <ColumnDefinition x:Name="kanbanBoard" Width="1*"/>
+                <ColumnDefinition x:Name="responsable" Width="1*"/>
+                <ColumnDefinition x:Name="kanbanBoard" Width="0*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Height="850">
