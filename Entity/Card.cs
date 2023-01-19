@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Dragger_WPF.Entity
 {
@@ -22,5 +23,7 @@ namespace Dragger_WPF.Entity
         public DateOnly _goalDate { get; set; }
 
         public DateOnly _creationDate { get; set; }
+
+        public int _position { get; set; }
     }
 }

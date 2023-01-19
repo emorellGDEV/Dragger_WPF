@@ -128,7 +128,14 @@
                                         <Border.Background>
                                             <SolidColorBrush Color="White" Opacity="0.2"/>
                                         </Border.Background>
-
+                                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Label Content="1" FontSize="25"/>
+                                            <Label Content="2" FontSize="25"/>
+                                            <Label Content="3" FontSize="25"/>
+                                            <Label Content="4" FontSize="25"/>
+                                            <Label Content="5" FontSize="25"/>
+                                            <Label Content="6" FontSize="25"/>
+                                        </StackPanel>
                                     </Border>
 
 
@@ -175,7 +182,7 @@
             </StackPanel>
 
 
-
+            
             <StackPanel Grid.Column="1">
 
                 <Border VerticalAlignment="Center" Margin="0,40,0,0"  BorderThickness="1" Width="1700" Height="700" >
