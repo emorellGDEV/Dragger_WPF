@@ -1,6 +1,6 @@
 using Dragger_WPF.Entity;
 using Dragger_WPF.Persistence;
-﻿using Dragger_WPF;
+using Dragger_WPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +17,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Dragger_WPF.Service;
 using System.Reflection;
+using System.Windows.Media.Animation;
+using RandomNameGeneratorLibrary;
 
 namespace Dragger_WPF
 {
@@ -26,6 +28,7 @@ namespace Dragger_WPF
     public partial class MainWindow : Window
     {
         List<Card> cards = new List<Card>();
+        List<Person> persons = new List<Person>();
 
         public MainWindow()
         {
@@ -59,11 +62,13 @@ namespace Dragger_WPF
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
+            Random r = new Random();
+            var placeName = new PlaceNameGenerator();
             Card card = new Card();
 
-            card._id_persona = 3;
-            card._id_card = 05;
-            card._description = "ALT DESCR";
+            card._id_persona = (int)r.NextInt64(0,1000);
+            card._id_card = (int)r.NextInt64(0,1000);
+            card._description = placeName.GenerateRandomPlaceName();
             card._creationDate = new DateOnly(2022, 12, 1);
             card._color = "red";
             card._priority = 3;
@@ -137,14 +142,80 @@ namespace Dragger_WPF
 
         private void addButtonRes_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Responsable");
+            var rName = new PersonNameGenerator();
+            Random r = new Random();
+            Person person = new Person();
+            person._id_person = (int)r.NextInt64(0,1000);
+            person._name = rName.GenerateRandomFirstName();
+            persons.Add(person);
+
+            Border border = new Border();
+            border.CornerRadius = new CornerRadius(10);
+            border.VerticalAlignment = VerticalAlignment.Top;
+            border.BorderThickness = new Thickness(2);
+            border.Width = 330;
+            border.Height = 150;
+            border.Margin = new Thickness(30,30,0,0);
+            border.Background = new SolidColorBrush(Colors.White);
+            border.Opacity= 0.5;
+
+            Grid grid = new Grid();
+            RowDefinition row1 = new RowDefinition();
+            RowDefinition row2 = new RowDefinition();
+            grid.RowDefinitions.Add(row1);
+            grid.RowDefinitions.Add(row2);
+
+            TextBlock codi = new TextBlock();
+            codi.Text = person._id_person.ToString();
+            Grid.SetRow(codi, 0);
+            codi.HorizontalAlignment = HorizontalAlignment.Left;
+            codi.Margin = new Thickness(20, 10, 0, 0);
+            grid.Children.Add(codi);
+
+
+
+            TextBlock nom = new TextBlock();
+            nom.Text = person._name;
+            Grid.SetRow(nom, 0);
+            nom.HorizontalAlignment = HorizontalAlignment.Right;
+            nom.Margin = new Thickness(0, 10, 20, 0);
+            grid.Children.Add(nom);
+
+            Button add = new Button();
+            add.Content = "change";
+            Grid.SetRow(add, 1);
+            add.HorizontalAlignment = HorizontalAlignment.Right;
+            add.Margin = new Thickness(0, 0, 60, 0);
+            grid.Children.Add(add);
+
+
+            Button delete = new Button();
+            delete.Content = "change";
+            grid.Children.Add(delete);
+            delete.HorizontalAlignment = HorizontalAlignment.Right;
+            delete.Margin = new Thickness(0, 0, 10, 0);
+            Grid.SetRow(delete, 1);
+
+            border.Child = grid;
+
+            wrapResponsable.Children.Add(border);
+
         }
 
 
         private void SaveCards()
         {
-            foreach (Card card in cards) {
+            foreach (Card card in cards)
+            {
                 DbContext.InsertCard(card);
+            }
+        }
+
+        private void SavePersons()
+        {
+            foreach (Person person in persons)
+            {
+                DbContext.InsertPerson(person);
             }
         }
 
@@ -173,21 +244,22 @@ namespace Dragger_WPF
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            SaveCards();          
-        }          
+            SaveCards();
+            SavePersons();
+        }
 
         void Editar(object sender, RoutedEventArgs e)
         {
             Window1 formulari = new Window1();
-           
+
             bool resultat = (bool)formulari.ShowDialog();
 
         }
 
         void Eliminar(object sender, RoutedEventArgs e)
         {
-          
-            
+
+
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Dragger_WPF.Entity
 {
     public class Person
     {
-        public int _id { get; set; }
+        public int _id_person { get; set; }
         public string _name { get; set; }
     }
 }

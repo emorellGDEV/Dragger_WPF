@@ -76,6 +76,30 @@ namespace Dragger_WPF.Persistence
             }
         }
 
+        public static void InsertPerson(Entity.Person person)
+        {
+            try
+            {
+                using (var ctx = GetInstance())
+                {
+                    var insert = "INSERT INTO Persons VALUES (?,?)";
+
+                    using (var command = new SQLiteCommand(insert, ctx))
+                    {
+                        command.Parameters.Add(new SQLiteParameter("id_person", person._id_person.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("name", person._name.ToString()));
+                        
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         public static SQLiteConnection GetInstance()
         {
             var db = new SQLiteConnection(
