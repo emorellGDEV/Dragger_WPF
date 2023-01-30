@@ -8,17 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Dragger_WPF.Service;
-using System.Reflection;
-using System.Windows.Media.Animation;
 using RandomNameGeneratorLibrary;
+using System.Reflection;
+using Dragger_WPF.UserControls;
 
 namespace Dragger_WPF
 {
@@ -34,6 +28,8 @@ namespace Dragger_WPF
         {
             InitializeComponent();
             DbContext.Up();
+            ReadCards();
+            ReadPersons();
         }
 
         private void kanbanView(object sender, RoutedEventArgs e)
@@ -62,82 +58,22 @@ namespace Dragger_WPF
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
-            Random r = new Random();
-            var placeName = new PlaceNameGenerator();
+
             Card card = new Card();
-
-            card._id_persona = (int)r.NextInt64(0,1000);
-            card._id_card = (int)r.NextInt64(0,1000);
-            card._description = placeName.GenerateRandomPlaceName();
-            card._creationDate = new DateOnly(2022, 12, 1);
-            card._color = "red";
-            card._priority = 3;
-            card._goalDate = new DateOnly(2023, 1, 1);
+            DateTime now = DateTime.Now;
+            String nowFormat = now.ToString("dd/MM/yyyy");
+            card._creationDate = Convert.ToDateTime(nowFormat);
+            card._id_card = DbContext.SelectMaxCard() + 1;
+            card._id_persona = 0;
+            card._goalDate = Convert.ToDateTime(nowFormat);
             card._position = 1;
+            card._color = string.Empty;
+            card._priority= 0;
+            card._description = "Notes";
 
-            cards.Add(card);
-
-            Border border = new Border();
-            border.Width = 540;
-            border.Height = 300;
-            border.CornerRadius = new CornerRadius(8);
-            border.Margin = new Thickness(20);
-
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.Color = Colors.White;
-            brush.Opacity = 0.2;
-            border.Background = brush;
-
-            StackPanel stackPanel = new StackPanel();
-            stackPanel.Orientation = Orientation.Vertical;
-            stackPanel.VerticalAlignment = VerticalAlignment.Center;
-            stackPanel.HorizontalAlignment = HorizontalAlignment.Center;
-
-            Label label1 = new Label();
-            label1.Content = card._id_card;
-            label1.FontSize = 25;
-            stackPanel.Children.Add(label1);
-
-            Label label2 = new Label();
-            label2.Content = card._id_persona;
-            label2.FontSize = 25;
-            stackPanel.Children.Add(label2);
-
-            Label label3 = new Label();
-            label3.Content = card._description;
-            label3.FontSize = 25;
-            stackPanel.Children.Add(label3);
-
-            Label label4 = new Label();
-            label4.Content = card._creationDate;
-            label4.FontSize = 25;
-            stackPanel.Children.Add(label4);
-
-            Label label5 = new Label();
-            label5.Content = card._goalDate;
-            label5.FontSize = 25;
-            stackPanel.Children.Add(label5);
-
-            // Add the remaining labels in a similar manner
-
-            border.Child = stackPanel;
-
-            //DEPENDENCY PROPERTY
-
-            if (card._position == 1)
-            {
-                stackTODO.Children.Add(border);
-            }
-            else if (card._position == 2)
-            {
-                stackDOING.Children.Add(border);
-            }
-            else if (card._position == 3)
-            {
-                stackDONE.Children.Add(border);
-            }
-            else
-                MessageBox.Show("SOMETHING WENT WRONG", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            CardUserControl cardUser = new CardUserControl(card);
+            stackTODO.Children.Add(cardUser);
+            DbContext.InsertCard(card);
         }
 
         private void addButtonRes_Click(object sender, RoutedEventArgs e)
@@ -145,7 +81,7 @@ namespace Dragger_WPF
             var rName = new PersonNameGenerator();
             Random r = new Random();
             Person person = new Person();
-            person._id_person = (int)r.NextInt64(0,1000);
+            person._id_person = (int)r.NextInt64(0, 1000);
             person._name = rName.GenerateRandomFirstName();
             persons.Add(person);
 
@@ -155,9 +91,9 @@ namespace Dragger_WPF
             border.BorderThickness = new Thickness(2);
             border.Width = 330;
             border.Height = 150;
-            border.Margin = new Thickness(30,30,0,0);
+            border.Margin = new Thickness(30, 30, 0, 0);
             border.Background = new SolidColorBrush(Colors.White);
-            border.Opacity= 0.5;
+            border.Opacity = 0.5;
 
             Grid grid = new Grid();
             RowDefinition row1 = new RowDefinition();
@@ -200,6 +136,12 @@ namespace Dragger_WPF
 
             wrapResponsable.Children.Add(border);
 
+
+
+            //INSERT PERSON 
+            DbContext.InsertPerson(person);
+
+
         }
 
 
@@ -219,33 +161,65 @@ namespace Dragger_WPF
             }
         }
 
+        private void ReadPersons()
+        {
+            List<Person> list = (List<Person>)PersonService.GetAll();
+            
+            foreach (Person person in list)
+            {
+                /*
+                PersonUserControl redPerson = new PersonUserControl();
+                wrapResponsable.Children.Add(redPerson.container);
+                */
 
-        //private void ReadCards()
-        //{
-        //    List<Card> redCards = (List<Card>)CardService.GetAll();
-        //    foreach (Card card in redCards)
-        //    {
-        //        if (card._position == 1)
-        //        {
-        //            stackTODO.Children.Add();
-        //        }
-        //        else if (card._position == 2)
-        //        {
-        //            stackDOING.Children.Add();
-        //        }
-        //        else if (card._position == 3)
-        //        {
-        //            stackDONE.Children.Add();
-        //        }
-        //        else
-        //            MessageBox.Show("SOMETHING WENT WRONG", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-        //}
+                persons.Add(person);
+            }
+        }
+
+
+        private void ReadCards()
+        {
+            List<Card> redCards = (List<Card>)CardService.GetAll();
+            foreach (Card red in redCards)
+            {
+                CardUserControl redUser = new CardUserControl(red);
+
+                // Add the remaining labels in a similar manner
+                if (red._position == 1)
+                {
+                    stackTODO.Children.Remove(redUser);
+                }
+                else if (red._position == 2)
+                {
+                    stackDOING.Children.Remove(redUser);
+                }
+                else if (red._position == 3)
+                {
+                    stackDONE.Children.Remove(redUser);
+                }
+
+
+                if (red._position == 1)
+                {
+                    stackTODO.Children.Add(redUser);
+                }
+                else if (red._position == 2)
+                {
+                    stackDOING.Children.Add(redUser);
+                }
+                else if (red._position == 3)
+                {
+                    stackDONE.Children.Add(redUser);
+                }
+                else
+                    MessageBox.Show("SOMETHING WENT WRONG", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            SaveCards();
-            SavePersons();
+            //SaveCards();
+            //SavePersons();
         }
 
         void Editar(object sender, RoutedEventArgs e)

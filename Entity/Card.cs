@@ -20,9 +20,9 @@ namespace Dragger_WPF.Entity
 
         public int _priority { get; set; }
 
-        public DateOnly _goalDate { get; set; }
+        public DateTime _goalDate { get; set; }
 
-        public DateOnly _creationDate { get; set; }
+        public DateTime _creationDate { get; set; }
 
         public int _position { get; set; }
     }
