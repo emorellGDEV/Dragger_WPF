@@ -70,7 +70,8 @@ namespace Dragger_WPF.Persistence
                         command.ExecuteNonQuery();
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -105,6 +106,26 @@ namespace Dragger_WPF.Persistence
             }
         }
 
+        public static void DeleteCard(Entity.Card card)
+        {
+            try
+            {
+                using (var ctx = GetInstance())
+                {
+                    var delete = "Delete from Cards where id_card = " + card._id_card.ToString();
+
+                    using (var command = new SQLiteCommand(delete, ctx))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         public static void InsertPerson(Entity.Person person)
         {
             try
@@ -117,7 +138,50 @@ namespace Dragger_WPF.Persistence
                     {
                         command.Parameters.Add(new SQLiteParameter("id_person", person._id_person.ToString()));
                         command.Parameters.Add(new SQLiteParameter("name", person._name.ToString()));
-                        
+
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public static void DeletePerson(Entity.Person person)
+        {
+            try
+            {
+                using (var ctx = GetInstance())
+                {
+                    var delete = "Delete from Persons where id_person = " + person._id_person.ToString();
+
+                    using (var command = new SQLiteCommand(delete, ctx))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public static void UpdatePerson(Entity.Person person)
+        {
+            try
+            {
+                using (var ctx = GetInstance())
+                {
+                    var update = "Update Persons set id_person = ?, name = ? where id_card = " + person._id_person.ToString();
+
+                    using (var command = new SQLiteCommand(update, ctx))
+                    {
+                        command.Parameters.Add(new SQLiteParameter("id_person", person._id_person.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("name", person._name.ToString()));
 
                         command.ExecuteNonQuery();
                     }
@@ -136,6 +200,33 @@ namespace Dragger_WPF.Persistence
                 using (var ctx = GetInstance())
                 {
                     var query = "select max(id_card) from cards";
+
+                    using (var command = new SQLiteCommand(query, ctx))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                return reader.GetInt32(0);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return 0;
+        }
+
+        public static int SelectMaxPerson()
+        {
+            try
+            {
+                using (var ctx = GetInstance())
+                {
+                    var query = "select max(id_person) from persons";
 
                     using (var command = new SQLiteCommand(query, ctx))
                     {

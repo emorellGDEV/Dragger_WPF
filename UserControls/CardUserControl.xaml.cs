@@ -26,12 +26,9 @@ namespace Dragger_WPF.UserControls
         bool editing = false;
         Card card { get; set; }
 
-        Grid contain { get; set; }
-
         public CardUserControl(Card cardd)
         {
             card = cardd;
-            contain = container;
             InitializeComponent();
 
             lidCard.Content = card._id_card;
@@ -49,6 +46,7 @@ namespace Dragger_WPF.UserControls
 
         private void Edit(object sender, RoutedEventArgs e)
         {
+            tidPer.SelectedValue = card._id_persona;
             editing = true;
             if (editing)
             {
@@ -76,8 +74,7 @@ namespace Dragger_WPF.UserControls
                 if (tgDate.Text != lgDate.Content.ToString())
                     lgDate.Content = tgDate.Text;
 
-                if (tidPer.SelectedValue.ToString() != lidPer.Content.ToString())
-                    lidPer.Content = tidPer.SelectedValue.ToString();
+                lidPer.Content = tidPer.SelectedValue.ToString();
 
                 card._goalDate = Convert.ToDateTime(lgDate.Content);
                 card._id_persona = Convert.ToInt32(lidPer.Content);
@@ -89,7 +86,12 @@ namespace Dragger_WPF.UserControls
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            ((Panel)this.Parent).Children.Remove(this);
+            if (MessageBox.Show("ALERTA!", "Vols borrar aquesta tasca?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No){
+            }
+            else {
+                ((Panel)this.Parent).Children.Remove(this);
+                DbContext.DeleteCard(card);
+            }
         }
     }
 }
