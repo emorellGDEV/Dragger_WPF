@@ -52,27 +52,10 @@
                     <Label Content="Creat:" Grid.Row="0" FontSize="23"/>
                     <Label Content="Objectiu:" Grid.Row="1" FontSize="23"/>
                     <Label x:Name="lcDate" Content="cDate" Grid.Row="0" Grid.Column="1" FontSize="23"/>
-                    
+
                     <Label x:Name="lgDate" Content="gDate" Grid.Row="1" Grid.Column="1" FontSize="23"/>
                     <DatePicker x:Name="tgDate" Visibility="Collapsed" Grid.Row="1" Grid.Column="1" FontSize="23"/>
                 </Grid>
-                <Button x:Name="bLeft" Content="&lt;" Grid.Column="2" Grid.Row="2" FontSize="50">
-                    <Button.Background>
-                        <SolidColorBrush Color="White" Opacity="0"/>
-                    </Button.Background>
-                    <Button.BorderBrush>
-                        <SolidColorBrush Color="White" Opacity="0"/>
-                    </Button.BorderBrush>
-                </Button>
-
-                <Button x:Name="bRight" Content=">" Grid.Column="3" Grid.Row="2" FontSize="50">
-                    <Button.Background>
-                        <SolidColorBrush Color="White" Opacity="0"/>
-                    </Button.Background>
-                    <Button.BorderBrush>
-                        <SolidColorBrush Color="White" Opacity="0"/>
-                    </Button.BorderBrush>
-                </Button>
             </Grid>
         </Border>
     </Grid>

@@ -124,23 +124,6 @@
                                 <StackPanel x:Name="stackTODO">
                                     <!-- ITEMS -->
 
-                                    <Border Width="540" Height="300" CornerRadius="8" Margin="20">
-                                        <Border.Background>
-                                            <SolidColorBrush Color="White" Opacity="0.2"/>
-                                        </Border.Background>
-                                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                            <Label Content="1" FontSize="25"/>
-                                            <Label Content="2" FontSize="25"/>
-                                            <Label Content="3" FontSize="25"/>
-                                            <Label Content="4" FontSize="25"/>
-                                            <Label Content="5" FontSize="25"/>
-                                            <Label Content="6" FontSize="25"/>
-                                        </StackPanel>
-                                    </Border>
-
-
-
-
                                 </StackPanel>
                             </ScrollViewer>
                         </Border>
