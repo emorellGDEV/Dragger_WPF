@@ -58,22 +58,29 @@ namespace Dragger_WPF
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
+            int maxPerson = DbContext.SelectMaxPerson();
+            if (maxPerson == 0)
+            {
+                MessageBox.Show("Crea un responsable!");
+            }
+            else
+            {
+                Card card = new Card();
+                DateTime now = DateTime.Now;
+                String nowFormat = now.ToString("dd/MM/yyyy");
+                card._creationDate = Convert.ToDateTime(nowFormat);
+                card._id_card = DbContext.SelectMaxCard() + 1;
+                card._id_persona = maxPerson;
+                card._goalDate = Convert.ToDateTime(nowFormat);
+                card._position = 1;
+                card._color = string.Empty;
+                card._priority = 1;
+                card._description = "Notes";
 
-            Card card = new Card();
-            DateTime now = DateTime.Now;
-            String nowFormat = now.ToString("dd/MM/yyyy");
-            card._creationDate = Convert.ToDateTime(nowFormat);
-            card._id_card = DbContext.SelectMaxCard() + 1;
-            card._id_persona = 0;
-            card._goalDate = Convert.ToDateTime(nowFormat);
-            card._position = 1;
-            card._color = string.Empty;
-            card._priority= 0;
-            card._description = "Notes";
-
-            CardUserControl cardUser = new CardUserControl(card);
-            stackTODO.Children.Add(cardUser);
-            DbContext.InsertCard(card);
+                CardUserControl cardUser = new CardUserControl(card);
+                stackTODO.Children.Add(cardUser);
+                DbContext.InsertCard(card);
+            }
         }
 
         private void addButtonRes_Click(object sender, RoutedEventArgs e)
@@ -91,13 +98,11 @@ namespace Dragger_WPF
         private void ReadPersons()
         {
             List<Person> list = (List<Person>)PersonService.GetAll();
-            
+
             foreach (Person person in list)
             {
-                /*
-                PersonUserControl redPerson = new PersonUserControl();
-                wrapResponsable.Children.Add(redPerson.container);
-                */
+                PersonUserControl redPerson = new PersonUserControl(person);
+                wrapResponsable.Children.Add(redPerson);
 
                 persons.Add(person);
             }
@@ -110,6 +115,7 @@ namespace Dragger_WPF
             foreach (Card red in redCards)
             {
                 CardUserControl redUser = new CardUserControl(red);
+                redUser.checkPriority();
 
                 // Add the remaining labels in a similar manner
                 if (red._position == 1)

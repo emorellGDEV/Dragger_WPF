@@ -47,6 +47,9 @@ namespace Dragger_WPF.UserControls
 
                 txtCodiResp.Visibility = Visibility.Visible;
                 txtnom.Visibility = Visibility.Visible;
+
+                nomResp.Visibility = Visibility.Hidden;
+                codiResp.Visibility = Visibility.Hidden;
             }
         }
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
@@ -54,6 +57,8 @@ namespace Dragger_WPF.UserControls
             if (e.Key == Key.Return && editing)
             {
                 editing = false;
+                nomResp.Visibility = Visibility.Visible;
+                codiResp.Visibility = Visibility.Visible;
                 txtCodiResp.Visibility = Visibility.Collapsed;
                 txtnom.Visibility = Visibility.Collapsed;
 
@@ -72,11 +77,26 @@ namespace Dragger_WPF.UserControls
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("ALERTA!", "Vols borrar aquest usuari?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) {
+            List<int> ids = new List<int>();
+            if (MessageBox.Show("Vols borrar aquest usuari?", "ALERTA!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
             }
-            else {
-                ((Panel)this.Parent).Children.Remove(this);
-                DbContext.DeletePerson(person);
+            else
+            {
+                List<Card> cards = (List<Card>)CardService.GetAll();
+                foreach (Card card in cards)
+                {
+                    ids.Add(card._id_persona);
+                }
+                if (ids.Contains(Convert.ToInt32(codiResp.Text)))
+                {
+                    MessageBox.Show("Aquesta persona te tasques assignades!");
+                }
+                else
+                {
+                    ((Panel)this.Parent).Children.Remove(this);
+                    DbContext.DeletePerson(person);
+                }
             }
         }
     }

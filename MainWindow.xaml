@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Dragger_WPF"
         mc:Ignorable="d"
         Title="Dragger" Height="1000" Width="1900"
-        Closing="Window_Closing">
+        Closing="Window_Closing"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="Resources/Background2.png"/>
     </Window.Background>

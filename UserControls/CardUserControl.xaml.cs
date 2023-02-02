@@ -26,11 +26,13 @@ namespace Dragger_WPF.UserControls
         bool editing = false;
         Card card { get; set; }
 
+        int priorityIndex;
+
         public CardUserControl(Card cardd)
         {
             card = cardd;
             InitializeComponent();
-
+            checkPriority();
             lidCard.Content = card._id_card;
             lidPer.Content = card._id_persona;
             ldescription.Content = card._description;
@@ -38,6 +40,7 @@ namespace Dragger_WPF.UserControls
             String fGoal = card._goalDate.ToString("dd/MM/yyyy");
             lcDate.Content = fCreation;
             lgDate.Content = fGoal;
+            priorityIndex = card._priority;
 
             tidPer.ItemsSource = PersonService.GetAll();
             tidPer.DisplayMemberPath = "_name";
@@ -47,6 +50,9 @@ namespace Dragger_WPF.UserControls
         private void Edit(object sender, RoutedEventArgs e)
         {
             tidPer.SelectedValue = card._id_persona;
+            tidPer.ItemsSource = PersonService.GetAll();
+            tidPer.DisplayMemberPath = "_name";
+            tidPer.SelectedValuePath = "_id_person";
             editing = true;
             if (editing)
             {
@@ -86,11 +92,48 @@ namespace Dragger_WPF.UserControls
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("ALERTA!", "Vols borrar aquesta tasca?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No){
+            if (MessageBox.Show("Vols borrar aquesta tasca?", "ALERTA!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
             }
-            else {
+            else
+            {
                 ((Panel)this.Parent).Children.Remove(this);
                 DbContext.DeleteCard(card);
+            }
+        }
+
+        private void priorityButton_Click(object sender, RoutedEventArgs e)
+        {
+            priority.Background = null;
+
+            checkPriority();
+            card._priority = priorityIndex;
+            DbContext.UpdateCard(card);
+        }
+
+        public void checkPriority()
+        {
+
+            switch (priorityIndex)
+            {
+                case 1:
+                    {
+                        priority.Background = Brushes.Yellow;
+                        priorityIndex = 2;
+                        break;
+                    }
+                case 2:
+                    {
+                        priority.Background = Brushes.Red;
+                        priorityIndex = 3;
+                        break;
+                    }
+                case 3:
+                    {
+                        priorityIndex = 1;
+                        priority.Background = Brushes.Green;
+                        break;
+                    }
             }
         }
     }
