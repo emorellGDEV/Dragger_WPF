@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -10,20 +11,19 @@ namespace Dragger_WPF.Entity
 {
     public class Card
     {
-        public int _id_persona { get; set; }
+        public ObjectId _id { get; set; }
+        public int fk_id_responsable { get; set; }
 
-        public int _id_card { get; set; }
+        public int id_card { get; set; }
 
-        public string _description { get; set; }
+        public string description { get; set; }
 
-        public string _color { get; set; }
+        public int priority{ get; set; }
 
-        public int _priority { get; set; }
+        public DateTime goalDate { get; set; }
 
-        public DateTime _goalDate { get; set; }
+        public DateTime creationDate { get; set; }
 
-        public DateTime _creationDate { get; set; }
-
-        public int _position { get; set; }
+        public int position { get; set; }
     }
 }

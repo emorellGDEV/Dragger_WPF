@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ namespace Dragger_WPF.Entity
 {
     public class Person
     {
-        public int _id_person { get; set; }
-        public string _name { get; set; }
+        public ObjectId _id { get; set; }
+        public int id_person { get; set; }
+        public string name { get; set; }
     }
 }

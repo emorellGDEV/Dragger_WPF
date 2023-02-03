@@ -14,6 +14,9 @@ using RandomNameGeneratorLibrary;
 using System.Reflection;
 using Dragger_WPF.UserControls;
 using System.Windows.Shapes;
+using MongoDB.Driver.Linq;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace Dragger_WPF
 {
@@ -28,7 +31,6 @@ namespace Dragger_WPF
         public MainWindow()
         {
             InitializeComponent();
-            DbContext.Up();
             ReadCards();
             ReadPersons();
         }
@@ -57,20 +59,18 @@ namespace Dragger_WPF
 
         }
 
-        private void Button_Click_Add(object sender, RoutedEventArgs e)
+        private async void Button_Click_Add(object sender, RoutedEventArgs e)
         {
-
             Card card = new Card();
             DateTime now = DateTime.Now;
             String nowFormat = now.ToString("dd/MM/yyyy");
-            card._creationDate = Convert.ToDateTime(nowFormat);
-            card._id_card = DbContext.SelectMaxCard() + 1;
-            card._id_persona = 0;
-            card._goalDate = Convert.ToDateTime(nowFormat);
-            card._position = 1;
-            card._color = string.Empty;
-            card._priority= 0;
-            card._description = "Notes";
+            card.creationDate = Convert.ToDateTime(nowFormat);
+            card.id_card = await DbContext.SelectMaxCard() + 1;
+            card.fk_id_responsable = await DbContext.SelectMaxPerson();
+            card.goalDate = Convert.ToDateTime(nowFormat);
+            card.position = 1;
+            card.priority = 1;
+            card.description = "Notes";
 
             CardUserControl cardUser = new CardUserControl(card);
             stackTODO.Children.Add(cardUser);
@@ -80,8 +80,9 @@ namespace Dragger_WPF
         private void addButtonRes_Click(object sender, RoutedEventArgs e)
         {
             Person person = new Person();
-            person._id_person = DbContext.SelectMaxPerson() + 1;
-            person._name = "Nom";
+            //person.id_person = DbContext.GetMaxPersonId() + 1;
+            person.id_person = DbContext.SelectMaxPerson().Result +1;
+            person.name = "Nom";
 
             PersonUserControl personUser = new PersonUserControl(person);
             wrapResponsable.Children.Add(personUser);
@@ -92,13 +93,10 @@ namespace Dragger_WPF
         private void ReadPersons()
         {
             List<Person> list = (List<Person>)PersonService.GetAll();
-            
             foreach (Person person in list)
             {
-                /*
-                PersonUserControl redPerson = new PersonUserControl();
-                wrapResponsable.Children.Add(redPerson.container);
-                */
+                PersonUserControl redPerson = new PersonUserControl(person);
+                wrapResponsable.Children.Add(redPerson);
 
                 persons.Add(person);
             }
@@ -107,47 +105,44 @@ namespace Dragger_WPF
 
         private void ReadCards()
         {
-            List<Card> redCards = (List<Card>)CardService.GetAll();
+            var redCards = (List<Card>)CardService.GetAll();
+
+
             foreach (Card red in redCards)
             {
                 CardUserControl redUser = new CardUserControl(red);
+                redUser.checkPriority();
 
                 // Add the remaining labels in a similar manner
-                if (red._position == 1)
+                if (red.position == 1)
                 {
                     stackTODO.Children.Remove(redUser);
                 }
-                else if (red._position == 2)
+                else if (red.position == 2)
                 {
                     stackDOING.Children.Remove(redUser);
                 }
-                else if (red._position == 3)
+                else if (red.position == 3)
                 {
                     stackDONE.Children.Remove(redUser);
                 }
 
 
-                if (red._position == 1)
+                if (red.position == 1)
                 {
                     stackTODO.Children.Add(redUser);
                 }
-                else if (red._position == 2)
+                else if (red.position == 2)
                 {
                     stackDOING.Children.Add(redUser);
                 }
-                else if (red._position == 3)
+                else if (red.position == 3)
                 {
                     stackDONE.Children.Add(redUser);
                 }
                 else
                     MessageBox.Show("SOMETHING WENT WRONG", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            //SaveCards();
-            //SavePersons();
         }
 
         void Editar(object sender, RoutedEventArgs e)

@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:Dragger_WPF.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="330"
-             KeyDown="OnKeyDownHandler">
+             KeyDown="OnKeyDownHandler"
+             Margin="20">
 
     <Grid>
         <Border HorizontalAlignment="Left"  CornerRadius="10" Width="330" Height="150" Background="White" Opacity="0.5">
@@ -22,8 +23,8 @@
                 <TextBox Visibility="Collapsed" x:Name="txtCodiResp" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="35" Height="40"  Margin="20,10,0,0" Text="Codi"/>
 
 
-                <TextBlock x:Name="nomResp" HorizontalAlignment="Right"  VerticalAlignment="Top" FontSize="35" Height="40" Margin="0,10,20,0" Text="Nom Resp"/>
-                <TextBox Visibility="Collapsed" x:Name="txtnom" HorizontalAlignment="Right"  VerticalAlignment="Top" FontSize="35" Height="40" Margin="0,10,20,0" Text="Nom Resp"/>
+                <TextBlock x:Name="nomResp" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="55" Text="Nom Resp" Width="200"/>
+                <TextBox Visibility="Collapsed" x:Name="txtnom" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="55" Width="200" Text="Nom Resp"/>
 
                 <Button   BorderThickness="0" HorizontalAlignment="Right" Name="editar" Click="Edit" Grid.Row="1" Width="40" Height="50"  Margin="0,0,60,0"  Background="White">
                     <Image Source="/Resources/edit.png" ></Image>

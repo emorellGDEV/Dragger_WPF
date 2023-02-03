@@ -29,27 +29,33 @@ namespace Dragger_WPF.UserControls
         bool editing = false;
         Card card { get; set; }
 
+        int priorityIndex;
+
         public CardUserControl(Card cardd)
         {
             card = cardd;
             InitializeComponent();
-
-            lidCard.Content = card._id_card;
-            lidPer.Content = card._id_persona;
-            ldescription.Content = card._description;
-            String fCreation = card._creationDate.ToString("dd/MM/yyyy");
-            String fGoal = card._goalDate.ToString("dd/MM/yyyy");
+            checkPriority();
+            lidCard.Content = card.id_card;
+            lidPer.Content = card.fk_id_responsable;
+            ldescription.Content = card.description;
+            String fCreation = card.creationDate.ToString("dd/MM/yyyy");
+            String fGoal = card.goalDate.ToString("dd/MM/yyyy");
             lcDate.Content = fCreation;
             lgDate.Content = fGoal;
+            priorityIndex = card.priority;
 
-            tidPer.ItemsSource = PersonService.GetAll();
-            tidPer.DisplayMemberPath = "_name";
-            tidPer.SelectedValuePath = "_id_person";
+            tidPer.ItemsSource = (System.Collections.IEnumerable)PersonService.GetAll();
+            tidPer.DisplayMemberPath = "name";
+            tidPer.SelectedValuePath = "id_person";
         }
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            tidPer.SelectedValue = card._id_persona;
+            tidPer.SelectedValue = card.fk_id_responsable;
+            tidPer.ItemsSource = (System.Collections.IEnumerable)PersonService.GetAll();
+            tidPer.DisplayMemberPath = "name";
+            tidPer.SelectedValuePath = "id_person";
             editing = true;
             if (editing)
             {
@@ -77,11 +83,12 @@ namespace Dragger_WPF.UserControls
                 if (tgDate.Text != lgDate.Content.ToString())
                     lgDate.Content = tgDate.Text;
 
-                lidPer.Content = tidPer.SelectedValue.ToString();
+                if ((int)tidPer.SelectedValue != card.fk_id_responsable)
+                    lidPer.Content = tidPer.SelectedValue.ToString();
 
-                card._goalDate = Convert.ToDateTime(lgDate.Content);
-                card._id_persona = Convert.ToInt32(lidPer.Content);
-                card._description = Convert.ToString(ldescription.Content);
+                card.goalDate = Convert.ToDateTime(lgDate.Content);
+                card.fk_id_responsable = Convert.ToInt32(lidPer.Content);
+                card.description = Convert.ToString(ldescription.Content);
 
                 DbContext.UpdateCard(card);
             }
@@ -89,11 +96,48 @@ namespace Dragger_WPF.UserControls
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("ALERTA!", "Vols borrar aquesta tasca?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No){
+            if (MessageBox.Show("Vols borrar aquesta tasca?", "ALERTA!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            {
             }
-            else {
+            else
+            {
                 ((Panel)this.Parent).Children.Remove(this);
                 DbContext.DeleteCard(card);
+            }
+        }
+
+        private void priorityButton_Click(object sender, RoutedEventArgs e)
+        {
+            priority.Background = null;
+
+            checkPriority();
+            card.priority = priorityIndex;
+            DbContext.UpdateCard(card);
+        }
+
+        public void checkPriority()
+        {
+
+            switch (priorityIndex)
+            {
+                case 1:
+                    {
+                        priority.Background = Brushes.Yellow;
+                        priorityIndex = 2;
+                        break;
+                    }
+                case 2:
+                    {
+                        priority.Background = Brushes.Red;
+                        priorityIndex = 3;
+                        break;
+                    }
+                case 3:
+                    {
+                        priorityIndex = 1;
+                        priority.Background = Brushes.Green;
+                        break;
+                    }
             }
         }
 
