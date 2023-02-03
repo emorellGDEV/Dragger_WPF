@@ -13,6 +13,7 @@ using Dragger_WPF.Service;
 using RandomNameGeneratorLibrary;
 using System.Reflection;
 using Dragger_WPF.UserControls;
+using System.Windows.Shapes;
 
 namespace Dragger_WPF
 {
@@ -162,5 +163,43 @@ namespace Dragger_WPF
 
 
         }
+
+       void Done_drop(object sender, DragEventArgs e)
+        {
+            
+            var obj = e.Data.GetData(typeof(CardUserControl)) as CardUserControl;
+
+          ((StackPanel)obj.Parent).Children.Remove(obj);
+
+          stackDONE.Children.Add(obj);
+
+
+     }
+
+        void Doing_drop(object sender, DragEventArgs e)
+        {
+
+            var obj = e.Data.GetData(typeof(CardUserControl)) as CardUserControl;
+
+            ((StackPanel)obj.Parent).Children.Remove(obj);
+
+            stackDOING.Children.Add(obj);
+
+
+        }
+
+        void Do_drop(object sender, DragEventArgs e)
+        {
+
+            var obj = e.Data.GetData(typeof(CardUserControl)) as CardUserControl;
+
+            ((StackPanel)obj.Parent).Children.Remove(obj);
+
+            stackTODO.Children.Add(obj);
+
+
+        }
+
+
     }
 }

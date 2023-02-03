@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Windows;
 using Dragger_WPF.Entity;
+using System.Security.Cryptography;
 
 namespace Dragger_WPF.Persistence
 {
     class DbContext
     {
         private const string DBName = "database.sqlite";
-        private const string SQLScript = @"C:\Users\eduar\OneDrive\DAM2\M13 _Projecte\Projecte\Dragger - WPF\Dragger_WPF\Util\database.sql";
+        private const string SQLScript = "C:\\Users\\joanb\\source\\repos\\Dragger_WPF\\Util\\database.sql";
         private static bool IsDbRecentlyCreated = false;
 
         public static void Up()
@@ -47,7 +48,7 @@ namespace Dragger_WPF.Persistence
                 }
             }
         }
-
+     
         public static void InsertCard(Entity.Card card)
         {
             try

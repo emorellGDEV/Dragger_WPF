@@ -14,7 +14,10 @@
         </ContextMenu>
     </UserControl.ContextMenu>
     <Grid x:Name="container">
-        <Border Width="540" Height="310" CornerRadius="8" Background="White" Opacity="0.5">
+        
+        <Border Width="540" Height="310" CornerRadius="8" Background="White" Opacity="0.5"
+                x:Name="BorderB"
+                MouseMove="Border_MouseMove">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -67,5 +70,6 @@
                 </Grid>
             </Grid>
         </Border>
+
     </Grid>
 </UserControl>

@@ -112,10 +112,11 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Height="850">
 
                     <!-- TODO -->
-                    <StackPanel Orientation="Vertical" Width="600" Height="850" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Border BorderBrush="Black" BorderThickness="4" CornerRadius="8 8 0 0">
+                    <StackPanel  DragOver="Do_drop" AllowDrop="True" Orientation="Vertical" Width="600" Height="850" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Border x:Name="BorderB" BorderBrush="Black" BorderThickness="4" CornerRadius="8 8 0 0">
                             <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold">TO DO</TextBlock>
                         </Border>
+                        
                         <Border BorderBrush="Black" BorderThickness="4 0 4 4" CornerRadius="0 0 8 8">
                             <ScrollViewer VerticalAlignment="Top" Width="600" Height="750" VerticalScrollBarVisibility="Auto">
                                 <ScrollViewer.Background>
@@ -130,7 +131,7 @@
                     </StackPanel>
 
                     <!-- DOING -->
-                    <StackPanel Orientation="Vertical" Width="600" Height="850" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,0,20,0">
+                    <StackPanel  DragOver="Doing_drop" AllowDrop="True" Orientation="Vertical" Width="600" Height="850" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,0,20,0">
                         <Border BorderBrush="Black" BorderThickness="4" CornerRadius="8 8 0 0">
                             <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold">DOING</TextBlock>
                         </Border>
@@ -146,19 +147,21 @@
                     </StackPanel>
 
                     <!-- DONE -->
-                    <StackPanel Orientation="Vertical" Width="600" Height="850" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel  DragOver="Done_drop" AllowDrop="True"  Orientation="Vertical" Width="600" Height="850" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Border BorderBrush="Black" BorderThickness="4" CornerRadius="8 8 0 0">
                             <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold">DONE</TextBlock>
                         </Border>
-                        <Border BorderBrush="Black" BorderThickness="4 0 4 4" CornerRadius="0 0 8 8">
-                            <ScrollViewer VerticalAlignment="Top" Width="600" Height="750" VerticalScrollBarVisibility="Auto">
+                       
+                        <Border  BorderBrush="Black" BorderThickness="4 0 4 4" CornerRadius="0 0 8 8" >
+                            <ScrollViewer   VerticalAlignment="Top" Width="600" Height="750" VerticalScrollBarVisibility="Auto">
                                 <ScrollViewer.Background>
                                     <SolidColorBrush Color="Black" Opacity="0.5"/>
                                 </ScrollViewer.Background>
-                                <StackPanel x:Name="stackDONE">
-                                </StackPanel>
+                                <StackPanel x:Name="stackDONE"  >
+                                </StackPanel >
                             </ScrollViewer>
                         </Border>
+                        
                     </StackPanel>
 
                 </StackPanel>

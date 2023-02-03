@@ -23,6 +23,9 @@ namespace Dragger_WPF.UserControls
     /// </summary>
     public partial class CardUserControl : UserControl
     {
+        
+
+
         bool editing = false;
         Card card { get; set; }
 
@@ -93,5 +96,20 @@ namespace Dragger_WPF.UserControls
                 DbContext.DeleteCard(card);
             }
         }
+
+      
+        private void Border_MouseMove(object sender, MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            if(e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragDrop.DoDragDrop(this, this,  DragDropEffects.Move);
+            }
+        }
+
+
+
+
+
     }
 }
