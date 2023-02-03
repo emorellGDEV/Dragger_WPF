@@ -32,8 +32,8 @@ namespace Dragger_WPF.UserControls
             person = newPerson;
             InitializeComponent();
 
-            codiResp.Text = person._id_person.ToString();
-            nomResp.Text = person._name;
+            codiResp.Text = person.id_person.ToString();
+            nomResp.Text = person.name;
         }
 
         private void Edit(object sender, RoutedEventArgs e)
@@ -68,8 +68,8 @@ namespace Dragger_WPF.UserControls
                 if (txtnom.Text != nomResp.Text.ToString())
                     nomResp.Text = txtnom.Text;
 
-                person._name = nomResp.Text;
-                person._id_person = Convert.ToInt32(codiResp.Text);
+                person.name = nomResp.Text;
+                person.id_person = Convert.ToInt32(codiResp.Text);
 
                 DbContext.UpdatePerson(person);
             }
@@ -86,7 +86,7 @@ namespace Dragger_WPF.UserControls
                 List<Card> cards = (List<Card>)CardService.GetAll();
                 foreach (Card card in cards)
                 {
-                    ids.Add(card._id_persona);
+                    ids.Add(card.fk_id_responsable);
                 }
                 if (ids.Contains(Convert.ToInt32(codiResp.Text)))
                 {

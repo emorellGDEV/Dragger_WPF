@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -58,14 +59,14 @@ namespace Dragger_WPF.Persistence
 
                     using (var command = new SQLiteCommand(insert, ctx))
                     {
-                        command.Parameters.Add(new SQLiteParameter("id_card", card._id_card.ToString()));
-                        command.Parameters.Add(new SQLiteParameter("fk_id_responsable", card._id_persona.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("id_card", card.id_card.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("fk_id_responsable", card.fk_id_responsable.ToString()));
                         command.Parameters.Add(new SQLiteParameter("description", card._description.ToString()));
                         command.Parameters.Add(new SQLiteParameter("color", card._color.ToString()));
                         command.Parameters.Add(new SQLiteParameter("priority", card._priority.ToString()));
-                        command.Parameters.Add(new SQLiteParameter("goalDate", card._goalDate.ToString()));
-                        command.Parameters.Add(new SQLiteParameter("creationDate", card._creationDate.ToString()));
-                        command.Parameters.Add(new SQLiteParameter("position", card._position.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("goalDate", card.goalDate.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("creationDate", card.creationDate.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("position", card.position.ToString()));
 
                         command.ExecuteNonQuery();
                     }
@@ -84,17 +85,17 @@ namespace Dragger_WPF.Persistence
                 using (var ctx = GetInstance())
                 {
                     var update = "Update Cards set fk_id_responsable = ?, description = ?, color = ?, priority = ?," +
-                        "goaldate = ?, creationDate = ?, position = ? where id_card = " + card._id_card.ToString();
+                        "goaldate = ?, creationDate = ?, position = ? where id_card = " + card.id_card.ToString();
 
                     using (var command = new SQLiteCommand(update, ctx))
                     {
-                        command.Parameters.Add(new SQLiteParameter("fk_id_responsable", card._id_persona.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("fk_id_responsable", card.fk_id_responsable.ToString()));
                         command.Parameters.Add(new SQLiteParameter("description", card._description.ToString()));
                         command.Parameters.Add(new SQLiteParameter("color", card._color.ToString()));
                         command.Parameters.Add(new SQLiteParameter("priority", card._priority.ToString()));
-                        command.Parameters.Add(new SQLiteParameter("goalDate", card._goalDate.ToString()));
-                        command.Parameters.Add(new SQLiteParameter("creationDate", card._creationDate.ToString()));
-                        command.Parameters.Add(new SQLiteParameter("position", card._position.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("goalDate", card.goalDate.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("creationDate", card.creationDate.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("position", card.position.ToString()));
 
                         command.ExecuteNonQuery();
                     }
@@ -112,7 +113,7 @@ namespace Dragger_WPF.Persistence
             {
                 using (var ctx = GetInstance())
                 {
-                    var delete = "Delete from Cards where id_card = " + card._id_card.ToString();
+                    var delete = "Delete from Cards where id_card = " + card.id_card.ToString();
 
                     using (var command = new SQLiteCommand(delete, ctx))
                     {
@@ -136,8 +137,8 @@ namespace Dragger_WPF.Persistence
 
                     using (var command = new SQLiteCommand(insert, ctx))
                     {
-                        command.Parameters.Add(new SQLiteParameter("id_person", person._id_person.ToString()));
-                        command.Parameters.Add(new SQLiteParameter("name", person._name.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("id_person", person.id_person.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("name", person.name.ToString()));
 
 
                         command.ExecuteNonQuery();
@@ -156,7 +157,7 @@ namespace Dragger_WPF.Persistence
             {
                 using (var ctx = GetInstance())
                 {
-                    var delete = "Delete from Persons where id_person = " + person._id_person.ToString();
+                    var delete = "Delete from Persons where id_person = " + person.id_person.ToString();
 
                     using (var command = new SQLiteCommand(delete, ctx))
                     {
@@ -176,12 +177,12 @@ namespace Dragger_WPF.Persistence
             {
                 using (var ctx = GetInstance())
                 {
-                    var update = "Update Persons set id_person = ?, name = ? where id_person = " + person._id_person.ToString();
+                    var update = "Update Persons set id_person = ?, name = ? where id_person = " + person.id_person.ToString();
 
                     using (var command = new SQLiteCommand(update, ctx))
                     {
-                        command.Parameters.Add(new SQLiteParameter("id_person", person._id_person.ToString()));
-                        command.Parameters.Add(new SQLiteParameter("name", person._name.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("id_person", person.id_person.ToString()));
+                        command.Parameters.Add(new SQLiteParameter("name", person.name.ToString()));
 
                         command.ExecuteNonQuery();
                     }
@@ -262,3 +263,4 @@ namespace Dragger_WPF.Persistence
 
     }
 }
+*/

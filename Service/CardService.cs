@@ -1,5 +1,6 @@
 ﻿using Dragger_WPF.Entity;
 using Dragger_WPF.Persistence;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -14,36 +15,17 @@ namespace Dragger_WPF.Service
 {
     class CardService
     {
-        public static IEnumerable<Card> GetAll()
+
+        public static IMongoCollection<Card> GetCards()
         {
-            var result = new List<Card>();
+            return DbContext.GetInstance().GetCollection<Card>("Cards");
+        }
 
-            using (var ctx = DbContext.GetInstance())
-            {
-                var query = "SELECT id_card, fk_id_responsable, description, color, " +
-                    "priority, cast(goalDate as nvarchar(10)) as goalDate, cast(creationDate as nvarchar(10)) as creationDate, position FROM Cards";
+        public static List<Card> GetAll()
+        {
+            IMongoCollection<Card> cards = CardService.GetCards();
 
-                using (var command = new SQLiteCommand(query, ctx))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            result.Add(new Card
-                            {
-                                _id_card = Convert.ToInt32(reader["id_card"].ToString()),
-                                _id_persona = Convert.ToInt32(reader["fk_id_responsable"].ToString()),
-                                _description =  reader["description"].ToString(),
-                                _color = reader["color"].ToString(),
-                                _priority = Convert.ToInt32(reader["priority"].ToString()),
-                                _goalDate = Convert.ToDateTime(reader["goalDate"].ToString()),
-                                _creationDate = Convert.ToDateTime(reader["creationDate"].ToString()),
-                                _position = Convert.ToInt32(reader["position"].ToString())
-                            });
-                        }
-                    }
-                }
-            }
+            var result = cards.AsQueryable<Card>().ToList();
             return result;
         }
     }
