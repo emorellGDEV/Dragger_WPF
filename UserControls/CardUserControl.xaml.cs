@@ -44,16 +44,13 @@ namespace Dragger_WPF.UserControls
             lcDate.Content = fCreation;
             lgDate.Content = fGoal;
             priorityIndex = card.priority;
-
-            tidPer.ItemsSource = (System.Collections.IEnumerable)PersonService.GetAll();
-            tidPer.DisplayMemberPath = "name";
-            tidPer.SelectedValuePath = "id_person";
         }
 
         private void Edit(object sender, RoutedEventArgs e)
         {
             tidPer.SelectedValue = card.fk_id_responsable;
-            tidPer.ItemsSource = (System.Collections.IEnumerable)PersonService.GetAll();
+            tidPer.ItemsSource = PersonService.GetAll();
+            
             tidPer.DisplayMemberPath = "name";
             tidPer.SelectedValuePath = "id_person";
             editing = true;
@@ -141,13 +138,25 @@ namespace Dragger_WPF.UserControls
             }
         }
 
+        public void changePosition(int pos)
+        {
+            if (pos >= 1 && pos <= 3)
+            {
+                card.position = pos;
+                DbContext.UpdateCard(card);
+            }
+        }
+
       
         private void Border_MouseMove(object sender, MouseEventArgs e)
         {
-            base.OnMouseMove(e);
-            if(e.LeftButton == MouseButtonState.Pressed)
+            if (!editing)
             {
-                DragDrop.DoDragDrop(this, this,  DragDropEffects.Move);
+                base.OnMouseMove(e);
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    DragDrop.DoDragDrop(this, this, DragDropEffects.Move);
+                }
             }
         }
 

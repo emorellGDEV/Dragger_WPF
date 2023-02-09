@@ -45,11 +45,9 @@ namespace Dragger_WPF.UserControls
                 txtCodiResp.Text = codiResp.Text;
                 txtnom.Text = nomResp.Text;
 
-                txtCodiResp.Visibility = Visibility.Visible;
                 txtnom.Visibility = Visibility.Visible;
 
                 nomResp.Visibility = Visibility.Hidden;
-                codiResp.Visibility = Visibility.Hidden;
             }
         }
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
@@ -59,7 +57,6 @@ namespace Dragger_WPF.UserControls
                 editing = false;
                 nomResp.Visibility = Visibility.Visible;
                 codiResp.Visibility = Visibility.Visible;
-                txtCodiResp.Visibility = Visibility.Collapsed;
                 txtnom.Visibility = Visibility.Collapsed;
 
                 if (txtCodiResp.Text != codiResp.Text.ToString())
