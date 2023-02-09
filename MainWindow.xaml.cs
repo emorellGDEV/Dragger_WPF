@@ -167,9 +167,7 @@ namespace Dragger_WPF
           ((StackPanel)obj.Parent).Children.Remove(obj);
 
           stackDONE.Children.Add(obj);
-
-
-     }
+         }
 
         void Doing_drop(object sender, DragEventArgs e)
         {
@@ -192,7 +190,7 @@ namespace Dragger_WPF
 
             stackTODO.Children.Add(obj);
 
-
+          
         }
 
 
