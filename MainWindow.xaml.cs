@@ -61,6 +61,8 @@ namespace Dragger_WPF
 
         private async void Button_Click_Add(object sender, RoutedEventArgs e)
         {
+            var randomName = new PlaceNameGenerator();
+
             Card card = new Card();
             DateTime now = DateTime.Now;
             String nowFormat = now.ToString("dd/MM/yyyy");
@@ -70,18 +72,19 @@ namespace Dragger_WPF
             card.goalDate = Convert.ToDateTime(nowFormat);
             card.position = 1;
             card.priority = 1;
-            card.description = "Notes";
+            card.description = randomName.GenerateRandomPlaceName();
 
             CardUserControl cardUser = new CardUserControl(card);
             stackTODO.Children.Add(cardUser);
             DbContext.InsertCard(card);
         }
 
-        private void addButtonRes_Click(object sender, RoutedEventArgs e)
+        private async void addButtonRes_Click(object sender, RoutedEventArgs e)
         {
+            var randomName = new PersonNameGenerator();
             Person person = new Person();
-            person.id_person = DbContext.SelectMaxPerson().Result + 1;
-            person.name = "Nom";
+            person.id_person = await DbContext.SelectMaxPerson() + 1;
+            person.name = randomName.GenerateRandomFirstName();
 
             PersonUserControl personUser = new PersonUserControl(person);
             wrapResponsable.Children.Add(personUser);

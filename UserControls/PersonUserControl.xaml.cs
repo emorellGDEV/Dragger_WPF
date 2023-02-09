@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,8 +42,9 @@ namespace Dragger_WPF.UserControls
             editing = true;
             if (editing)
             {
+                border.Background = Brushes.PaleVioletRed;
+                border.Opacity = 0.5;
 
-                txtCodiResp.Text = codiResp.Text;
                 txtnom.Text = nomResp.Text;
 
                 txtnom.Visibility = Visibility.Visible;
@@ -54,13 +56,11 @@ namespace Dragger_WPF.UserControls
         {
             if (e.Key == Key.Return && editing)
             {
+                border.Background = Brushes.White;
+                border.Opacity = 0.5;
                 editing = false;
                 nomResp.Visibility = Visibility.Visible;
-                codiResp.Visibility = Visibility.Visible;
                 txtnom.Visibility = Visibility.Collapsed;
-
-                if (txtCodiResp.Text != codiResp.Text.ToString())
-                    codiResp.Text = txtCodiResp.Text;
 
                 if (txtnom.Text != nomResp.Text.ToString())
                     nomResp.Text = txtnom.Text;

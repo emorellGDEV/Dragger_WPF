@@ -23,7 +23,7 @@ namespace Dragger_WPF.UserControls
     /// </summary>
     public partial class CardUserControl : UserControl
     {
-        
+
 
 
         bool editing = false;
@@ -50,29 +50,36 @@ namespace Dragger_WPF.UserControls
         {
             tidPer.SelectedValue = card.fk_id_responsable;
             tidPer.ItemsSource = PersonService.GetAll();
-            
+            lidPer.Visibility = Visibility.Hidden;
+            ldescription.Visibility = Visibility.Hidden;
+            lgDate.Visibility = Visibility.Hidden;
             tidPer.DisplayMemberPath = "name";
             tidPer.SelectedValuePath = "id_person";
             editing = true;
             if (editing)
             {
 
-                tdescription.Text = ldescription.Content.ToString();
-                tgDate.Text = lgDate.Content.ToString();
-
                 tdescription.Visibility = Visibility.Visible;
                 tgDate.Visibility = Visibility.Visible;
                 tidPer.Visibility = Visibility.Visible;
+                BorderB.Background = Brushes.PaleVioletRed;
+                BorderB.Opacity = 0.5;
+                tdescription.Text = ldescription.Content.ToString();
+                tgDate.Text = lgDate.Content.ToString();
+                tidPer.SelectedValue = card.fk_id_responsable;
+
             }
         }
-        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        private async void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return && editing)
             {
+                BorderB.Background = Brushes.White;
+                BorderB.Opacity = 0.5;
                 editing = false;
                 tdescription.Visibility = Visibility.Collapsed;
                 tgDate.Visibility = Visibility.Collapsed;
-                tidPer.Visibility = Visibility.Collapsed;
+                tidPer.Visibility = Visibility.Hidden;
 
                 if (tdescription.Text != ldescription.Content.ToString())
                     ldescription.Content = tdescription.Text;
@@ -80,12 +87,16 @@ namespace Dragger_WPF.UserControls
                 if (tgDate.Text != lgDate.Content.ToString())
                     lgDate.Content = tgDate.Text;
 
-                if ((int)tidPer.SelectedValue != card.fk_id_responsable)
-                    lidPer.Content = tidPer.SelectedValue.ToString();
 
-                card.goalDate = Convert.ToDateTime(lgDate.Content);
+                lidPer.Content = tidPer.SelectedValue.ToString();
+
                 card.fk_id_responsable = Convert.ToInt32(lidPer.Content);
+                card.goalDate = Convert.ToDateTime(lgDate.Content);
                 card.description = Convert.ToString(ldescription.Content);
+
+                lidPer.Visibility = Visibility.Visible;
+                ldescription.Visibility = Visibility.Visible;
+                lgDate.Visibility = Visibility.Visible;
 
                 DbContext.UpdateCard(card);
             }
@@ -147,7 +158,7 @@ namespace Dragger_WPF.UserControls
             }
         }
 
-      
+
         private void Border_MouseMove(object sender, MouseEventArgs e)
         {
             if (!editing)

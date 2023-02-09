@@ -35,10 +35,10 @@
 
                 <Label Content="Encarregat:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right"/>
                 <Label x:Name="lidPer" Content="IdPer" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left"/>
-                <ComboBox x:Name="tidPer" Width="130" Height="50" VerticalAlignment="Top" Visibility="Collapsed" Text="IdPer" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="tidPer" Width="130" Height="50" VerticalAlignment="Top" Visibility="Hidden" Text="IdPer" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" Background="Transparent"/>
 
                 <Label VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="ldescription" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Padding="15" Content="DESCRIPTION"/>
-                <TextBox x:Name="tdescription" Visibility="Collapsed" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Padding="15" Text="DESCRIPTION"/>
+                <TextBox x:Name="tdescription" Visibility="Collapsed" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Padding="15" Text="DESCRIPTION" Background="Transparent"/>
 
                 <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
@@ -54,17 +54,17 @@
                     <Label x:Name="lcDate" Content="cDate" Grid.Row="0" Grid.Column="1" FontSize="23"/>
 
                     <Label x:Name="lgDate" Content="gDate" Grid.Row="1" Grid.Column="1" FontSize="23"/>
-                    <DatePicker x:Name="tgDate" Visibility="Collapsed" Grid.Row="1" Grid.Column="1" FontSize="23"/>
+                    <DatePicker x:Name="tgDate" Visibility="Collapsed" Grid.Row="1" Grid.Column="1" FontSize="23" Background="Transparent"/>
                 </Grid>
                 <Grid Grid.Column="3" Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button  BorderThickness="0" Name="editar" Click="Edit" Grid.Column="0" Width="40" Height="50"  Background="White">
+                    <Button  BorderThickness="0" Name="editar" Click="Edit" Grid.Column="0" Width="40" Height="50"  Background="Transparent">
                         <Image Source="/Resources/edit.png" ></Image>
                     </Button>
-                    <Button  BorderThickness="0" Name="eliminar" Click="Delete" Grid.Column="1" Width="40" Height="50" Background="White">
+                    <Button  BorderThickness="0" Name="eliminar" Click="Delete" Grid.Column="1" Width="40" Height="50" Background="Transparent">
                         <Image Source="/Resources/eliminar.png" ></Image>
                     </Button>
                 </Grid>

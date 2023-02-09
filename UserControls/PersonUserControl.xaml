@@ -10,7 +10,7 @@
              Margin="20">
 
     <Grid>
-        <Border HorizontalAlignment="Left"  CornerRadius="10" Width="330" Height="150" Background="White" Opacity="0.5">
+        <Border x:Name="border"  HorizontalAlignment="Left"  CornerRadius="10" Width="330" Height="150" Background="White" Opacity="0.5">
             <Grid Width="330" Height="150">
                 <Grid.RowDefinitions>
                     <RowDefinition >
@@ -20,16 +20,15 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock x:Name="codiResp" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="35" Height="40"  Margin="20,10,0,0" Text="Codi"/>
-                <TextBox Visibility="Collapsed" x:Name="txtCodiResp" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="35" Height="40"  Margin="20,10,0,0" Text="Codi"/>
 
 
                 <TextBlock x:Name="nomResp" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="55" Text="Nom Resp" Width="200"/>
-                <TextBox Visibility="Collapsed" x:Name="txtnom" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="55" Width="200" Text="Nom Resp"/>
+                <TextBox Visibility="Collapsed" x:Name="txtnom" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="55" Width="200" Text="Nom Resp" Background="Transparent"/>
 
-                <Button   BorderThickness="0" HorizontalAlignment="Right" Name="editar" Click="Edit" Grid.Row="1" Width="40" Height="50"  Margin="0,0,60,0"  Background="White">
+                <Button   BorderThickness="0" HorizontalAlignment="Right" Name="editar" Click="Edit" Grid.Row="1" Width="40" Height="50"  Margin="0,0,60,0"  Background="Transparent">
                     <Image Source="/Resources/edit.png" ></Image>
                 </Button>
-                <Button  BorderThickness="0" HorizontalAlignment="Right" Name="eliminar" Click="Delete" Grid.Row="1" Width="40" Height="50" Margin="0,0,10,0"     Background="White">
+                <Button  BorderThickness="0" HorizontalAlignment="Right" Name="eliminar" Click="Delete" Grid.Row="1" Width="40" Height="50" Margin="0,0,10,0"     Background="Transparent">
                     <Image Source="/Resources/eliminar.png" ></Image>
                 </Button>
             </Grid>

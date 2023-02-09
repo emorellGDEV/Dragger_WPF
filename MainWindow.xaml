@@ -174,12 +174,11 @@
 
                 <Border VerticalAlignment="Center" Margin="0,40,0,0"  BorderThickness="1" Width="1700" Height="700" >
 
-
                     <Border.Background>
                         <SolidColorBrush Color="Black" Opacity="0.5"/>
                     </Border.Background>
                     <ScrollViewer>
-                        <WrapPanel Orientation="Horizontal" x:Name="wrapResponsable">
+                        <WrapPanel Orientation="Horizontal" x:Name="wrapResponsable" HorizontalAlignment="Center">
                             <!--CONTENIDOR PERSONES-->
                         </WrapPanel>
                     </ScrollViewer>
