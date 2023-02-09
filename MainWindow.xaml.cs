@@ -80,8 +80,7 @@ namespace Dragger_WPF
         private void addButtonRes_Click(object sender, RoutedEventArgs e)
         {
             Person person = new Person();
-            //person.id_person = DbContext.GetMaxPersonId() + 1;
-            person.id_person = DbContext.SelectMaxPerson().Result +1;
+            person.id_person = DbContext.SelectMaxPerson().Result + 1;
             person.name = "Nom";
 
             PersonUserControl personUser = new PersonUserControl(person);
@@ -167,7 +166,10 @@ namespace Dragger_WPF
           ((StackPanel)obj.Parent).Children.Remove(obj);
 
           stackDONE.Children.Add(obj);
-         }
+            obj.changePosition(3);
+
+
+     }
 
         void Doing_drop(object sender, DragEventArgs e)
         {
@@ -177,7 +179,7 @@ namespace Dragger_WPF
             ((StackPanel)obj.Parent).Children.Remove(obj);
 
             stackDOING.Children.Add(obj);
-
+            obj.changePosition(2);
 
         }
 
@@ -190,7 +192,7 @@ namespace Dragger_WPF
 
             stackTODO.Children.Add(obj);
 
-          
+            obj.changePosition(1);
         }
 
 

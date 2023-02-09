@@ -35,7 +35,7 @@
 
                 <Label Content="Encarregat:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right"/>
                 <Label x:Name="lidPer" Content="IdPer" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left"/>
-                <ComboBox x:Name="tidPer" Width="130" Height="50" VerticalAlignment="Top" Visibility="Hidden" Text="IdPer" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="tidPer" Width="130" Height="50" VerticalAlignment="Top" Visibility="Collapsed" Text="IdPer" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left"/>
 
                 <Label VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="ldescription" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Padding="15" Content="DESCRIPTION"/>
                 <TextBox x:Name="tdescription" Visibility="Collapsed" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Padding="15" Text="DESCRIPTION"/>
