@@ -31,6 +31,7 @@ namespace Dragger_WPF.UserControls
 
         int priorityIndex;
 
+        //Carrega l'informació de la "card" passsada per la funció que crea les tasques.
         public CardUserControl(Card cardd)
         {
             card = cardd;
@@ -48,6 +49,7 @@ namespace Dragger_WPF.UserControls
 
         private void Edit(object sender, RoutedEventArgs e)
         {
+            //Omplim la llista de responsables, actualitzada, al selector de responsable.
             tidPer.SelectedValue = card.fk_id_responsable;
             tidPer.ItemsSource = PersonService.GetAll();
             lidPer.Visibility = Visibility.Hidden;
@@ -58,7 +60,7 @@ namespace Dragger_WPF.UserControls
             editing = true;
             if (editing)
             {
-
+                //Ens mostra els elements editables del UserControl
                 tdescription.Visibility = Visibility.Visible;
                 tgDate.Visibility = Visibility.Visible;
                 tidPer.Visibility = Visibility.Visible;
@@ -72,6 +74,7 @@ namespace Dragger_WPF.UserControls
         }
         private async void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
+            //En detectar la tecla Enter, guarda els canvis realitzats.
             if (e.Key == Key.Return && editing)
             {
                 BorderB.Background = Brushes.White;
@@ -81,6 +84,7 @@ namespace Dragger_WPF.UserControls
                 tgDate.Visibility = Visibility.Collapsed;
                 tidPer.Visibility = Visibility.Hidden;
 
+                //Si no s'ha modificat el camp, no s'actualitza.
                 if (tdescription.Text != ldescription.Content.ToString())
                     ldescription.Content = tdescription.Text;
 
@@ -90,6 +94,7 @@ namespace Dragger_WPF.UserControls
 
                 lidPer.Content = tidPer.SelectedValue.ToString();
 
+                //Aplica aquests canvis a l'objecte card.
                 card.fk_id_responsable = Convert.ToInt32(lidPer.Content);
                 card.goalDate = Convert.ToDateTime(lgDate.Content);
                 card.description = Convert.ToString(ldescription.Content);
@@ -98,22 +103,26 @@ namespace Dragger_WPF.UserControls
                 ldescription.Visibility = Visibility.Visible;
                 lgDate.Visibility = Visibility.Visible;
 
+                //Actualitza en la bdd els canvis realitzats mitjançant la funció UpdateCard
                 DbContext.UpdateCard(card);
             }
         }
 
         private void Delete(object sender, RoutedEventArgs e)
         {
+
             if (MessageBox.Show("Vols borrar aquesta tasca?", "ALERTA!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
             {
             }
             else
             {
+                //El·limina la tasca del stackpanel i la borra de la bdd.
                 ((Panel)this.Parent).Children.Remove(this);
                 DbContext.DeleteCard(card);
             }
         }
 
+        //Canvia la prioritat de la tasca
         private void priorityButton_Click(object sender, RoutedEventArgs e)
         {
             priority.Background = null;
@@ -123,6 +132,7 @@ namespace Dragger_WPF.UserControls
             DbContext.UpdateCard(card);
         }
 
+        //Aplica els canvis de colors de la tasca llegint l'index de prioritat i aplicant el color corresponent.
         public void checkPriority()
         {
 
@@ -152,6 +162,7 @@ namespace Dragger_WPF.UserControls
             }
         }
 
+        //Actualitza la posició de la tasca.
         public void changePosition(int pos)
         {
             if (pos >= 1 && pos <= 3)
@@ -161,9 +172,10 @@ namespace Dragger_WPF.UserControls
             }
         }
 
-
+        
         private void Border_MouseMove(object sender, MouseEventArgs e)
         {
+            //Funcionalitat DragAndDrop, en cas de estar editant, esta deshabilitat.
             if (!editing)
             {
                 base.OnMouseMove(e);

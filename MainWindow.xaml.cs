@@ -25,8 +25,6 @@ namespace Dragger_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Card> cards = new List<Card>();
-        List<Person> persons = new List<Person>();
 
         public MainWindow()
         {
@@ -35,6 +33,7 @@ namespace Dragger_WPF
             ReadPersons();
         }
 
+        //Mostra el panel kanban i amaga el de responsables.
         private void kanbanView(object sender, RoutedEventArgs e)
         {
             if (addButton.Visibility == Visibility.Collapsed)
@@ -47,6 +46,7 @@ namespace Dragger_WPF
 
         }
 
+        //Mostra el panel de responsables i amaga el kanban
         private void responsableView(object sender, RoutedEventArgs e)
         {
             if (addButtonRes.Visibility == Visibility.Collapsed)
@@ -59,18 +59,21 @@ namespace Dragger_WPF
 
         }
 
+        //Afegeix una targeta a la columna TODO
         private async void Button_Click_Add(object sender, RoutedEventArgs e)
         {
             int maxPerson = await DbContext.SelectMaxPerson();
             int maxCard = await DbContext.SelectMaxCard();
+            //Comprova que almenys hi ha 1 responsable per la tasca
             if (maxPerson <= 0)
             {
                 MessageBox.Show("No tens responsables, crea un i torna a intentar-ho.");
             }
             else
-            {
+            {//Si hi ha responsables disponibles, instancia una tasca.
                 var randomName = new PlaceNameGenerator();
 
+                //Proporciona valors "dafult" a la tasca.
                 Card card = new Card();
                 DateTime now = DateTime.Now;
                 String nowFormat = now.ToString("dd/MM/yyyy");
@@ -83,6 +86,7 @@ namespace Dragger_WPF
                 card.description = randomName.GenerateRandomPlaceName();
 
                 CardUserControl cardUser = new CardUserControl(card);
+                //Inserta la tasca a l'stack panel i a la bdd.
                 stackTODO.Children.Add(cardUser);
                 DbContext.InsertCard(card);
             }
@@ -91,7 +95,7 @@ namespace Dragger_WPF
 
         private async void addButtonRes_Click(object sender, RoutedEventArgs e)
         {
-
+            //Funció similar a l'anterior, adaptada als responsables.
             var randomName = new PersonNameGenerator();
             Person person = new Person();
             person.id_person = await DbContext.SelectMaxPerson() + 1;
@@ -105,28 +109,29 @@ namespace Dragger_WPF
 
         private void ReadPersons()
         {
+            //Legeix els responsables, aquesta funció es llegeix al executar-se el programa.
             List<Person> list = (List<Person>)PersonService.GetAll();
             foreach (Person person in list)
             {
                 PersonUserControl redPerson = new PersonUserControl(person);
                 wrapResponsable.Children.Add(redPerson);
-
-                persons.Add(person);
             }
         }
 
 
         private void ReadCards()
         {
+            //Legeix les tasques, aquesta funció es llegeix al executar-se el programa.
             var redCards = (List<Card>)CardService.GetAll();
 
-
+            //En cas de les tasques, ens em de fixar en el parametre "position" de cada tasca. Després, la col·loca 
+            //en el seu stackpanel corresponent.
             foreach (Card red in redCards)
             {
                 CardUserControl redUser = new CardUserControl(red);
                 redUser.checkPriority();
 
-                // Add the remaining labels in a similar manner
+                //Per evitar errors, els el·limina de l'stack panel.
                 if (red.position == 1)
                 {
                     stackTODO.Children.Remove(redUser);
@@ -140,7 +145,7 @@ namespace Dragger_WPF
                     stackDONE.Children.Remove(redUser);
                 }
 
-
+                //I després els posiciona.
                 if (red.position == 1)
                 {
                     stackTODO.Children.Add(redUser);
@@ -158,20 +163,6 @@ namespace Dragger_WPF
             }
         }
 
-        void Editar(object sender, RoutedEventArgs e)
-        {
-            Window1 formulari = new Window1();
-
-            bool resultat = (bool)formulari.ShowDialog();
-
-        }
-
-        void Eliminar(object sender, RoutedEventArgs e)
-        {
-
-
-        }
-
         void Done_drop(object sender, DragEventArgs e)
         {
 
@@ -181,8 +172,6 @@ namespace Dragger_WPF
 
             stackDONE.Children.Add(obj);
             obj.changePosition(3);
-
-
         }
 
         void Doing_drop(object sender, DragEventArgs e)

@@ -25,6 +25,7 @@ namespace Dragger_WPF.UserControls
     /// </summary>
     public partial class PersonUserControl : UserControl
     {
+        //Els metodes d'aquest usercontrol son iguals o casi iguals als del cardusercontrol, adaptat a l'objecte Person.
         Person person;
 
         bool editing = false;

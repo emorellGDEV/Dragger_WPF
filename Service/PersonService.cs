@@ -12,6 +12,7 @@ namespace Dragger_WPF.Service
 {
     class PersonService
     {
+        //Funcionalitat identica al CardService
         public static IMongoCollection<Person> GetPersons()
         {
             return DbContext.GetInstance().GetCollection<Person>("Persons");
