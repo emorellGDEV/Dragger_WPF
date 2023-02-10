@@ -3,18 +3,30 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dragger_WPF", "Dragger_WPF.csproj", "{02FC3AA3-43DF-465F-8325-7D9C3EC0B50D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dragger_WPF", "Dragger_WPF.csproj", "{02FC3AA3-43DF-465F-8325-7D9C3EC0B50D}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "..\Setup\Setup.vdproj", "{BF5B4B24-302D-4751-B4B7-CC8172433E6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{02FC3AA3-43DF-465F-8325-7D9C3EC0B50D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{02FC3AA3-43DF-465F-8325-7D9C3EC0B50D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02FC3AA3-43DF-465F-8325-7D9C3EC0B50D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{02FC3AA3-43DF-465F-8325-7D9C3EC0B50D}.Debug|x86.Build.0 = Debug|Any CPU
 		{02FC3AA3-43DF-465F-8325-7D9C3EC0B50D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02FC3AA3-43DF-465F-8325-7D9C3EC0B50D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02FC3AA3-43DF-465F-8325-7D9C3EC0B50D}.Release|x86.ActiveCfg = Release|Any CPU
+		{02FC3AA3-43DF-465F-8325-7D9C3EC0B50D}.Release|x86.Build.0 = Release|Any CPU
+		{BF5B4B24-302D-4751-B4B7-CC8172433E6A}.Debug|Any CPU.ActiveCfg = Debug
+		{BF5B4B24-302D-4751-B4B7-CC8172433E6A}.Debug|x86.ActiveCfg = Debug
+		{BF5B4B24-302D-4751-B4B7-CC8172433E6A}.Release|Any CPU.ActiveCfg = Release
+		{BF5B4B24-302D-4751-B4B7-CC8172433E6A}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -61,26 +61,37 @@ namespace Dragger_WPF
 
         private async void Button_Click_Add(object sender, RoutedEventArgs e)
         {
-            var randomName = new PlaceNameGenerator();
+            int maxPerson = await DbContext.SelectMaxPerson();
+            int maxCard = await DbContext.SelectMaxCard();
+            if (maxPerson <= 0)
+            {
+                MessageBox.Show("No tens responsables, crea un i torna a intentar-ho.");
+            }
+            else
+            {
+                var randomName = new PlaceNameGenerator();
 
-            Card card = new Card();
-            DateTime now = DateTime.Now;
-            String nowFormat = now.ToString("dd/MM/yyyy");
-            card.creationDate = Convert.ToDateTime(nowFormat);
-            card.id_card = await DbContext.SelectMaxCard() + 1;
-            card.fk_id_responsable = await DbContext.SelectMaxPerson();
-            card.goalDate = Convert.ToDateTime(nowFormat);
-            card.position = 1;
-            card.priority = 1;
-            card.description = randomName.GenerateRandomPlaceName();
+                Card card = new Card();
+                DateTime now = DateTime.Now;
+                String nowFormat = now.ToString("dd/MM/yyyy");
+                card.creationDate = Convert.ToDateTime(nowFormat);
+                card.id_card = maxCard + 1;
+                card.fk_id_responsable = maxPerson;
+                card.goalDate = Convert.ToDateTime(nowFormat);
+                card.position = 1;
+                card.priority = 1;
+                card.description = randomName.GenerateRandomPlaceName();
 
-            CardUserControl cardUser = new CardUserControl(card);
-            stackTODO.Children.Add(cardUser);
-            DbContext.InsertCard(card);
+                CardUserControl cardUser = new CardUserControl(card);
+                stackTODO.Children.Add(cardUser);
+                DbContext.InsertCard(card);
+            }
+
         }
 
         private async void addButtonRes_Click(object sender, RoutedEventArgs e)
         {
+
             var randomName = new PersonNameGenerator();
             Person person = new Person();
             person.id_person = await DbContext.SelectMaxPerson() + 1;
@@ -161,18 +172,18 @@ namespace Dragger_WPF
 
         }
 
-       void Done_drop(object sender, DragEventArgs e)
+        void Done_drop(object sender, DragEventArgs e)
         {
-            
+
             var obj = e.Data.GetData(typeof(CardUserControl)) as CardUserControl;
 
-          ((StackPanel)obj.Parent).Children.Remove(obj);
+            ((StackPanel)obj.Parent).Children.Remove(obj);
 
-          stackDONE.Children.Add(obj);
+            stackDONE.Children.Add(obj);
             obj.changePosition(3);
 
 
-     }
+        }
 
         void Doing_drop(object sender, DragEventArgs e)
         {

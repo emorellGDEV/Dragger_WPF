@@ -96,8 +96,20 @@
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Width="200" Height="50" VerticalAlignment="Center" Click="kanbanView" Content="KANBAN" FontSize="28" FontWeight="Bold" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
-        <Button Width="200" Height="50" VerticalAlignment="Center" Click="responsableView" Grid.Column="1" Content="RESPONSABLE" FontSize="28" FontWeight="Bold" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+        <Button Margin="30,0,0,0" Width="200" Height="50" VerticalAlignment="Center" Click="kanbanView" Content="KANBAN" FontSize="25" FontWeight="Bold" BorderThickness="3" BorderBrush="Black">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Margin="30,0,0,0" Width="200" Height="50" VerticalAlignment="Center" Click="responsableView" Grid.Column="1" Content="RESPONSABLE" FontSize="25" FontWeight="Bold" BorderThickness="3" BorderBrush="Black">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Button.Resources>
+        </Button>
         <Button x:Name="addButton" Width="50" Height="50" Click="Button_Click_Add" Grid.Column="7" FontSize="80" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
             <Image Source="/Resources/add_Icon.png" />
         </Button>
@@ -117,7 +129,7 @@
                         <Border x:Name="BorderB" BorderBrush="Black" BorderThickness="4" CornerRadius="8 8 0 0">
                             <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold">TO DO</TextBlock>
                         </Border>
-                        
+
                         <Border BorderBrush="Black" BorderThickness="4 0 4 4" CornerRadius="0 0 8 8">
                             <ScrollViewer VerticalAlignment="Top" Width="600" Height="750" VerticalScrollBarVisibility="Auto">
                                 <ScrollViewer.Background>
@@ -152,7 +164,7 @@
                         <Border BorderBrush="Black" BorderThickness="4" CornerRadius="8 8 0 0">
                             <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold">DONE</TextBlock>
                         </Border>
-                       
+
                         <Border  BorderBrush="Black" BorderThickness="4 0 4 4" CornerRadius="0 0 8 8" >
                             <ScrollViewer   VerticalAlignment="Top" Width="600" Height="750" VerticalScrollBarVisibility="Auto">
                                 <ScrollViewer.Background>
@@ -162,7 +174,7 @@
                                 </StackPanel >
                             </ScrollViewer>
                         </Border>
-                        
+
                     </StackPanel>
 
                 </StackPanel>

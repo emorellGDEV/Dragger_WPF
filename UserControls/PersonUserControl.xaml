@@ -1,37 +1,37 @@
 ﻿<UserControl x:Class="Dragger_WPF.UserControls.PersonUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Dragger_WPF.UserControls"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="150" d:DesignWidth="330"
              KeyDown="OnKeyDownHandler"
              Margin="20">
 
-    <Grid>
-        <Border x:Name="border"  HorizontalAlignment="Left"  CornerRadius="10" Width="330" Height="150" Background="White" Opacity="0.5">
-            <Grid Width="330" Height="150">
-                <Grid.RowDefinitions>
-                    <RowDefinition >
-                    </RowDefinition>
-                    <RowDefinition >
-                    </RowDefinition>
-                </Grid.RowDefinitions>
+	<Grid>
+		<Border x:Name="border"  HorizontalAlignment="Left"  CornerRadius="10" Width="330" Height="150" Background="White" Opacity="0.5">
+			<Grid Width="330" Height="150">
+				<Grid.RowDefinitions>
+					<RowDefinition >
+					</RowDefinition>
+					<RowDefinition >
+					</RowDefinition>
+				</Grid.RowDefinitions>
 
-                <TextBlock x:Name="codiResp" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="35" Height="40"  Margin="20,10,0,0" Text="Codi"/>
+				<TextBlock x:Name="codiResp" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="35" Height="40"  Margin="20,10,0,0" Text="Codi"/>
 
 
-                <TextBlock x:Name="nomResp" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="55" Text="Nom Resp" Width="200"/>
-                <TextBox Visibility="Collapsed" x:Name="txtnom" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="55" Width="200" Text="Nom Resp" Background="Transparent"/>
+				<TextBlock x:Name="nomResp" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="55" Text="Nom Resp" Width="200"/>
+				<TextBox Visibility="Collapsed" x:Name="txtnom" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="35" Height="55" Width="200" Text="Nom Resp" Background="Transparent"/>
 
-                <Button   BorderThickness="0" HorizontalAlignment="Right" Name="editar" Click="Edit" Grid.Row="1" Width="40" Height="50"  Margin="0,0,60,0"  Background="Transparent">
-                    <Image Source="/Resources/edit.png" ></Image>
-                </Button>
-                <Button  BorderThickness="0" HorizontalAlignment="Right" Name="eliminar" Click="Delete" Grid.Row="1" Width="40" Height="50" Margin="0,0,10,0"     Background="Transparent">
-                    <Image Source="/Resources/eliminar.png" ></Image>
-                </Button>
-            </Grid>
-        </Border>
-    </Grid>
+				<Button   BorderThickness="0" HorizontalAlignment="Right" Name="editar" Click="Edit" Grid.Row="1" Width="40" Height="50"  Margin="0,0,60,0"  Background="Transparent">
+					<Image Source="/Resources/edit.png" ></Image>
+				</Button>
+				<Button  BorderThickness="0" HorizontalAlignment="Right" Name="eliminar" Click="Delete" Grid.Row="1" Width="40" Height="50" Margin="0,0,10,0"     Background="Transparent">
+					<Image Source="/Resources/eliminar.png" ></Image>
+				</Button>
+			</Grid>
+		</Border>
+	</Grid>
 </UserControl>
