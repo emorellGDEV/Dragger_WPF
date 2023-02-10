@@ -163,6 +163,10 @@ namespace Dragger_WPF
             }
         }
 
+        //Les següents funcions es fan carreg del draganddrop, totes criden a la funció changePosition de l'objecte card.
+        //Aquesta funció canvia el parametre posicio del objecte i de la bdd.
+
+        //Drop en la columna DONE.
         void Done_drop(object sender, DragEventArgs e)
         {
 
@@ -174,6 +178,7 @@ namespace Dragger_WPF
             obj.changePosition(3);
         }
 
+        //Drop en la columna DOING.
         void Doing_drop(object sender, DragEventArgs e)
         {
 
@@ -186,6 +191,7 @@ namespace Dragger_WPF
 
         }
 
+        //Drop en la columna TODO.
         void Do_drop(object sender, DragEventArgs e)
         {
 
