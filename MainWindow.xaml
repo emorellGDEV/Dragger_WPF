@@ -174,17 +174,13 @@
                                 </StackPanel >
                             </ScrollViewer>
                         </Border>
-
                     </StackPanel>
-
                 </StackPanel>
             </StackPanel>
 
-
-
             <StackPanel Grid.Column="1">
 
-                <Border VerticalAlignment="Center" Margin="0,40,0,0"  BorderThickness="1" Width="1700" Height="700" >
+                <Border VerticalAlignment="Center" Margin="0,40,0,0"  BorderThickness="4" Width="1800" Height="800"  BorderBrush="Black" CornerRadius="8">
 
                     <Border.Background>
                         <SolidColorBrush Color="Black" Opacity="0.5"/>

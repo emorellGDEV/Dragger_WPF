@@ -131,12 +131,14 @@ namespace Dragger_WPF.UserControls
                 case 1:
                     {
                         priority.Background = Brushes.Yellow;
+                        BorderB.BorderBrush = Brushes.Yellow;
                         priorityIndex = 2;
                         break;
                     }
                 case 2:
                     {
                         priority.Background = Brushes.Red;
+                        BorderB.BorderBrush = Brushes.Red;
                         priorityIndex = 3;
                         break;
                     }
@@ -144,6 +146,7 @@ namespace Dragger_WPF.UserControls
                     {
                         priorityIndex = 1;
                         priority.Background = Brushes.Green;
+                        BorderB.BorderBrush = Brushes.Green;
                         break;
                     }
             }
